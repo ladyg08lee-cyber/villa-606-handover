@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <title>fäm Interior | Villa 606 Handover Document System</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Reddit+Sans:wght@300;400;500;600;700&display=swap');
+    :root{--ink:#202020;--charcoal:#2b2b2a;--cream:#f4f1eb;--paper:#fff;--muted:#77736d;--line:#ded9d0;--gold:#b79a68;--ok:#55705d;--shadow:0 14px 34px rgba(28,27,25,.09)}
+    *{box-sizing:border-box} body{margin:0;background:var(--cream);color:var(--ink);font-family:'Reddit Sans',Arial,Helvetica,sans-serif;min-height:100vh}
+    button,input,textarea{font:inherit} button{cursor:pointer}.shell{max-width:1440px;margin:auto;padding:22px}
+    header{background:var(--charcoal);color:white;border-radius:18px;padding:25px 28px;display:flex;gap:25px;align-items:center;justify-content:space-between;box-shadow:var(--shadow)}
+    .brand{display:flex;align-items:center;gap:18px}.mark{font-size:34px;letter-spacing:-2px;font-weight:300}.mark b{font-weight:700}.divider{width:1px;height:47px;background:#696966}.eyebrow{color:#d7cab2;text-transform:uppercase;letter-spacing:2px;font-size:11px}.title{font-size:20px;margin-top:5px;letter-spacing:.2px}
+    .actions{display:flex;flex-wrap:wrap;gap:9px;justify-content:flex-end}.btn{border:1px solid #6f6f6c;background:transparent;color:#fff;border-radius:8px;padding:10px 14px}.btn:hover{background:#41413f}.btn.gold{background:var(--gold);border-color:var(--gold);color:#181714}.btn.light{background:white;color:#2b2b2a;border-color:white}
+    .notice{margin:15px 0;background:#fff;border:1px solid var(--line);padding:11px 15px;border-radius:10px;color:var(--muted);font-size:13px;display:flex;justify-content:space-between;gap:15px}.saved{color:var(--ok);font-weight:700}
+    .project{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin-bottom:16px;display:grid;grid-template-columns:2fr 1fr 1fr;gap:18px;box-shadow:0 6px 18px rgba(30,29,27,.04)}
+    label{display:block;text-transform:uppercase;letter-spacing:1.2px;font-size:10px;color:var(--muted);margin-bottom:7px}input,textarea{width:100%;border:0;border-bottom:1px solid var(--line);padding:5px 2px 8px;background:transparent;color:var(--ink);outline:none}input:focus,textarea:focus{border-color:var(--gold)}
+    [contenteditable="true"]{outline:none;border-radius:4px;transition:.15s}[contenteditable="true"]:hover{box-shadow:0 0 0 1px rgba(183,154,104,.55);background:rgba(183,154,104,.08)}[contenteditable="true"]:focus{box-shadow:0 0 0 2px var(--gold);background:rgba(255,255,255,.1)}
+    .workspace{display:grid;grid-template-columns:310px 1fr;gap:16px;min-height:620px}.sidebar,.panel{background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 6px 18px rgba(30,29,27,.04);overflow:hidden}.sidebar-head,.panel-head{padding:18px 19px;border-bottom:1px solid var(--line)}
+    h2{font-size:13px;text-transform:uppercase;letter-spacing:1.5px;margin:0}.subtle{font-size:12px;color:var(--muted);margin-top:6px}.tree{padding:10px}.tree-item{display:flex;align-items:center;gap:10px;padding:11px 10px;border-radius:8px;color:#55514c;font-size:13px}.tree-item.active{background:#ede8df;color:#242321;font-weight:700}.tree-item:hover{background:#f5f2ec}.folder-icon{color:var(--gold);font-size:18px}.panel-head{display:flex;align-items:center;justify-content:space-between;gap:15px}.breadcrumb{font-size:12px;color:var(--muted);margin-bottom:5px}.folder-title{font-size:22px}.add{background:var(--charcoal);color:#fff;border:0;border-radius:8px;padding:9px 12px}.content{padding:18px}.grid{display:grid;grid-template-columns:repeat(3,minmax(190px,1fr));gap:14px}.card{position:relative;border:1px solid var(--line);border-radius:12px;padding:18px;background:#fff;min-height:145px;transition:.2s;display:flex;flex-direction:column}.card:hover{transform:translateY(-2px);box-shadow:0 10px 25px rgba(25,24,22,.09);border-color:#c8bda9}.card-folder{font-size:31px;color:var(--gold);margin-bottom:14px}.card-name{font-size:14px;font-weight:700;line-height:1.3}.card-meta{font-size:11px;color:var(--muted);margin-top:7px}.open{margin-top:auto;padding-top:14px;font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#806c4a}.card-actions{position:absolute;right:8px;top:8px;display:flex;gap:4px}.icon-btn{width:25px;height:25px;border:0;border-radius:6px;background:#f1eee8;color:#615d56;display:none}.card:hover .icon-btn{display:block}.empty{text-align:center;padding:90px 20px;color:var(--muted)}
+    .modal{position:fixed;inset:0;background:rgba(10,10,10,.52);display:none;align-items:center;justify-content:center;padding:20px;z-index:10}.modal.show{display:flex}.dialog{width:min(480px,100%);background:white;border-radius:15px;padding:23px;box-shadow:0 24px 70px rgba(0,0,0,.3)}.dialog h3{margin:0 0 18px}.dialog-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:22px}.dialog .btn{color:#333;border-color:var(--line)}.dialog .btn.gold{color:#181714}.file-card{border-left:4px solid var(--gold)}.file-icon{font-size:30px;margin-bottom:14px}.file-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:auto;padding-top:14px}.file-actions button{border:1px solid var(--line);background:#faf8f4;border-radius:7px;padding:7px 9px;font-size:11px}.file-actions button:hover{background:#eee9df}.drive-status{font-size:11px;color:#8b867e;margin-top:5px}.drive-status.connected{color:#55705d;font-weight:700}.uploading{opacity:.6;pointer-events:none}
+    footer{text-align:center;color:#8b867e;font-size:10px;letter-spacing:1px;padding:18px}
+    @media(max-width:900px){header{align-items:flex-start;flex-direction:column}.actions{justify-content:flex-start}.project{grid-template-columns:1fr}.workspace{grid-template-columns:1fr}.sidebar{display:none}.grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:560px){.shell{padding:10px}.grid{grid-template-columns:1fr}.mark{font-size:28px}.divider{display:none}.actions .btn{padding:9px 10px;font-size:12px}}
+    @media print{body{background:white}.shell{max-width:none;padding:0}header{border-radius:0;box-shadow:none}.actions,.notice,.add,.card-actions,.sidebar{display:none!important}.workspace{display:block;min-height:0}.panel{box-shadow:none}.project{box-shadow:none}.grid{grid-template-columns:repeat(3,1fr)}.card{break-inside:avoid}footer{padding-top:30px}}
+  </style>
+</head>
+<body>
+<div class="shell">
+  <header>
+    <div class="brand"><div class="mark"><b contenteditable="true" data-edit-key="brandName" oninput="dirty()">fäm</b> <span contenteditable="true" data-edit-key="brandDivision" oninput="dirty()">interior</span></div><div class="divider"></div><div><div class="eyebrow" contenteditable="true" data-edit-key="eyebrow" oninput="dirty()">Project Closeout</div><div class="title" contenteditable="true" data-edit-key="reportTitle" oninput="dirty()">Villa 606 Handover Document System</div></div></div>
+    <div class="actions"><button class="btn" onclick="connectDrive()">Connect Google Drive</button><button class="btn" onclick="saveData()">Save Changes</button><button class="btn light" onclick="downloadHTML()">Save &amp; Download HTML</button><button class="btn gold" onclick="exportPDF()">Export to PDF</button></div>
+  </header>
+  <div class="notice"><span contenteditable="true" data-edit-key="guidance" oninput="dirty()">Live document control system — open a folder to upload, view and download project documents stored in Google Drive.</span><span id="saveStatus" class="saved">Saved in this browser • 10:43 AM</span></div>
+  <section class="project">
+    <div><label contenteditable="true" data-edit-key="projectLabel" oninput="dirty()">Project Name</label><input id="projectName" value="Villa 606" oninput="dirty()"></div>
+    <div><label contenteditable="true" data-edit-key="clientLabel" oninput="dirty()">Prepared For</label><input id="clientName" value="Client / Consultant" oninput="dirty()"></div>
+    <div><label contenteditable="true" data-edit-key="dateLabel" oninput="dirty()">Presentation Date</label><input id="dateField" type="date" value="2026-08-20" oninput="dirty()"></div>
+  </section>
+  <main class="workspace">
+    <aside class="sidebar"><div class="sidebar-head"><h2>Folder Directory</h2><div class="subtle">Master handover index</div></div><div class="tree" id="tree"><div class="tree-item active" onclick="goRoot()"><span class="folder-icon">▰</span>Handover Documents</div><div class="tree-item "><span class="folder-icon">▰</span><span>01 – Authority Approvals</span></div><div class="tree-item "><span class="folder-icon">▰</span><span>02 – O&amp;M Manuals</span></div><div class="tree-item "><span class="folder-icon">▰</span><span>03 – Warranties</span></div><div class="tree-item "><span class="folder-icon">▰</span><span>04 – Snagging</span></div><div class="tree-item "><span class="folder-icon">▰</span><span>05 – Testing &amp; Commissioning</span></div><div class="tree-item "><span class="folder-icon">▰</span><span>06 – As-Built Drawings</span></div><div class="tree-item "><span class="folder-icon">▰</span><span>07 – FF&amp;E</span></div><div class="tree-item "><span class="folder-icon">▰</span><span>08 – Assets</span></div><div class="tree-item "><span class="folder-icon">▰</span><span>09 – Defects Liability Period (DLP)</span></div><div class="tree-item "><span class="folder-icon">▰</span><span>10 – Taking-Over Certificate (TOC)</span></div><div class="tree-item "><span class="folder-icon">▰</span><span>11 – Handover Certificate</span></div></div></aside>
+    <section class="panel"><div class="panel-head"><div><div class="breadcrumb" id="breadcrumb">Handover Documents</div><div class="folder-title" id="folderTitle">Main Folders</div><div id="driveStatus" class="drive-status">Google Drive not connected</div></div><div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end"><button class="add" onclick="choosePdf()">＋ Upload PDF</button><button class="add" onclick="openAdd()">＋ Add Folder</button><input id="pdfInput" type="file" accept="application/pdf,.pdf" style="display:none" onchange="uploadSelectedPdf(event)"></div></div><div class="content"><div class="grid" id="grid"><div class="card"><div class="card-actions"><button class="icon-btn" title="Rename" onclick="openEdit(0)">✎</button><button class="icon-btn" title="Delete" onclick="deleteFolder(0)">×</button></div><div class="card-folder">▰</div><div class="card-name">01 – Authority Approvals</div><div class="card-meta">Approved authority documents</div><div class="open">Open folder →</div></div><div class="card"><div class="card-actions"><button class="icon-btn" title="Rename" onclick="openEdit(1)">✎</button><button class="icon-btn" title="Delete" onclick="deleteFolder(1)">×</button></div><div class="card-folder">▰</div><div class="card-name">02 – O&amp;M Manuals</div><div class="card-meta">Folder per specialist</div><div class="open">Open folder →</div></div><div class="card"><div class="card-actions"><button class="icon-btn" title="Rename" onclick="openEdit(2)">✎</button><button class="icon-btn" title="Delete" onclick="deleteFolder(2)">×</button></div><div class="card-folder">▰</div><div class="card-name">03 – Warranties</div><div class="card-meta">Folder per specialist</div><div class="open">Open folder →</div></div><div class="card"><div class="card-actions"><button class="icon-btn" title="Rename" onclick="openEdit(3)">✎</button><button class="icon-btn" title="Delete" onclick="deleteFolder(3)">×</button></div><div class="card-folder">▰</div><div class="card-name">04 – Snagging</div><div class="card-meta">Snag / De-snag / Final Inspection per floor</div><div class="open">Open folder →</div></div><div class="card"><div class="card-actions"><button class="icon-btn" title="Rename" onclick="openEdit(4)">✎</button><button class="icon-btn" title="Delete" onclick="deleteFolder(4)">×</button></div><div class="card-folder">▰</div><div class="card-name">05 – Testing &amp; Commissioning</div><div class="card-meta">MEP T&amp;C by section</div><div class="open">Open folder →</div></div><div class="card"><div class="card-actions"><button class="icon-btn" title="Rename" onclick="openEdit(5)">✎</button><button class="icon-btn" title="Delete" onclick="deleteFolder(5)">×</button></div><div class="card-folder">▰</div><div class="card-name">06 – As-Built Drawings</div><div class="card-meta">Basebuild, Post-Tension &amp; Fitout</div><div class="open">Open folder →</div></div><div class="card"><div class="card-actions"><button class="icon-btn" title="Rename" onclick="openEdit(6)">✎</button><button class="icon-btn" title="Delete" onclick="deleteFolder(6)">×</button></div><div class="card-folder">▰</div><div class="card-name">07 – FF&amp;E</div><div class="card-meta">FF&amp;E List</div><div class="open">Open folder →</div></div><div class="card"><div class="card-actions"><button class="icon-btn" title="Rename" onclick="openEdit(7)">✎</button><button class="icon-btn" title="Delete" onclick="deleteFolder(7)">×</button></div><div class="card-folder">▰</div><div class="card-name">08 – Assets</div><div class="card-meta">Key Register</div><div class="open">Open folder →</div></div><div class="card"><div class="card-actions"><button class="icon-btn" title="Rename" onclick="openEdit(8)">✎</button><button class="icon-btn" title="Delete" onclick="deleteFolder(8)">×</button></div><div class="card-folder">▰</div><div class="card-name">09 – Defects Liability Period (DLP)</div><div class="card-meta">fäm Interior only</div><div class="open">Open folder →</div></div><div class="card"><div class="card-actions"><button class="icon-btn" title="Rename" onclick="openEdit(9)">✎</button><button class="icon-btn" title="Delete" onclick="deleteFolder(9)">×</button></div><div class="card-folder">▰</div><div class="card-name">10 – Taking-Over Certificate (TOC)</div><div class="card-meta">fäm Interior to Client</div><div class="open">Open folder →</div></div><div class="card"><div class="card-actions"><button class="icon-btn" title="Rename" onclick="openEdit(10)">✎</button><button class="icon-btn" title="Delete" onclick="deleteFolder(10)">×</button></div><div class="card-folder">▰</div><div class="card-name">11 – Handover Certificate</div><div class="card-meta">fäm Interior to Client</div><div class="open">Open folder →</div></div></div></div></section>
+  </main>
+  <footer contenteditable="true" data-edit-key="footerText" oninput="dirty()">FÄM INTERIOR • VILLA 606 HANDOVER DOCUMENT CONTROL SYSTEM</footer>
+</div>
+<div class="modal" id="modal"><div class="dialog"><h3 id="modalTitle">Add Folder</h3><label>Folder Name</label><input id="folderInput" placeholder="Enter folder name"><div class="dialog-actions"><button class="btn" onclick="closeModal()">Cancel</button><button class="btn gold" onclick="confirmModal()">Save</button></div></div></div>
+<script>
+const STORAGE='famVilla606HandoverDocumentSystem';
+const DRIVE_ROOT_FOLDER_ID='18PmTVqvFiB3rwmruqlwKqYvuMq6HolVn';
+const GOOGLE_OAUTH_CLIENT_ID='PASTE_GOOGLE_OAUTH_CLIENT_ID_HERE';
+let driveToken=null, tokenClient=null;
+const defaultData={name:'Handover Documents',children:[
+ {name:'01 – Authority Approvals',note:'Approved authority documents',children:[
+   {name:'Affection Plan',children:[]},
+   {name:'Etisalat',children:[]},
+   {name:'DEWA',children:[
+     {name:'Water NOC',children:[]},
+     {name:'Electrical NOC',children:[]},
+     {name:'Approved LOD',children:[]},
+     {name:'Approved DEWA Connection Service',children:[]}
+   ]},
+   {name:'DCD',children:[
+     {name:'DCD Certificate',children:[]},
+     {name:'DCD Approved Drawings',children:[]}
+   ]},
+   {name:'DDA',children:[
+     {name:'BCC',children:[]},
+     {name:'Building Permit',children:[]},
+     {name:'Final Land Demarcation',children:[]},
+     {name:'DDA Approved Drawings – Post-Tension',children:[]},
+     {name:'DDA Approved Architectural As-Built',children:[]}
+   ]}
+ ]},
+ {name:'02 – O&M Manuals',note:'Folder per specialist',children:v606Specialists()},
+ {name:'03 – Warranties',note:'Folder per specialist',children:v606Specialists()},
+ {name:'04 – Snagging',note:'Snag / De-snag / Final Inspection per floor',children:[
+   {name:'Snag Report',children:snagFloors()},
+   {name:'De-snag Report',children:snagFloors()},
+   {name:'Approved Final Snagging Inspection',children:snagFloors()}
+ ]},
+ {name:'05 – Testing & Commissioning',note:'MEP T&C by section',children:[
+   {name:'Section A – HVAC',children:[
+     {name:'01. VRV/VRF & FCU System – TAB',children:[]},
+     {name:'02. Bathroom Exhaust Extract – TAB',children:[]},
+     {name:'03. Garage Ventilation – TAB',children:[]}
+   ]},
+   {name:'Section B – Plumbing',children:[
+     {name:'04. Drainage Systems',children:[]},
+     {name:'05. Booster & Transfer Pumps',children:[]},
+     {name:'06. GRP Water Storage Tanks',children:[]},
+     {name:'07. Solar Water Heating & Circulation',children:[]},
+     {name:'08. Cold Water Chiller & Recirculation Pump',children:[]},
+     {name:'09. UV Filter & Water Softener System',children:[]},
+     {name:'10. LPG System',children:[]}
+   ]},
+   {name:'Section C – Fire Protection',children:[
+     {name:'11. Fire Alarm Control Panel (FACP) System',children:[]},
+     {name:'12. Portable Fire Extinguishers',children:[]}
+   ]},
+   {name:'Section D – Electrical',children:[
+     {name:'13. Emergency Lighting & Exit Signs',children:[]},
+     {name:'14. Main Distribution Board (MDB)',children:[]},
+     {name:'15. LV Wiring, Conduits & Cable Tray',children:[]},
+     {name:'16. Earthing & Lightning Protection',children:[]},
+     {name:'17. DEWA Metering, NOC & Final Approval',children:[]}
+   ]},
+   {name:'Section E – ICT, Smart Home & Security',children:[
+     {name:'18. Structured Cabling – CAT6 & Fibre',children:[]},
+     {name:'19. Door Entry – Face ID / Video Intercom',children:[]},
+     {name:'20. IP CCTV / NVR System',children:[]},
+     {name:'21. Home Cinema System',children:[]},
+     {name:'22. Home Automation – Thermostat, Curtains & Lighting',children:[]}
+   ]},
+   {name:'Section F – Other Systems',children:[
+     {name:'23. Sliding Gate',children:[]},
+     {name:'24. Roller Shutter',children:[]},
+     {name:'25. Swimming Pool',children:[]},
+     {name:'26. Irrigation System',children:[]}
+   ]},
+   {name:'Section G – Lift / Elevator',children:[
+     {name:'27. Lift / Elevator',children:[]}
+   ]}
+ ]},
+ {name:'06 – As-Built Drawings',note:'Basebuild, Post-Tension & Fitout',children:[
+   {name:'06.01 Basebuild',children:[
+     {name:'06.01.1 Architectural',children:[{name:'CAD',children:[]},{name:'PDF',children:[]}]},
+     {name:'06.01.2 Structural',children:[{name:'CAD',children:[]},{name:'PDF',children:[]}]},
+     {name:'06.01.3 Mechanical',children:[{name:'CAD',children:[]},{name:'PDF',children:[]}]}
+   ]},
+   {name:'06.02 Post Tension',children:[
+     {name:'06.02.1 Structural',children:[{name:'CAD',children:[]},{name:'PDF',children:[]}]},
+     {name:'06.02.2 Planter Box',children:[{name:'CAD',children:[]},{name:'PDF',children:[]}]}
+   ]},
+   {name:'06.03 Fitout Works',children:[{name:'CAD',children:[]},{name:'PDF',children:[]}]}
+ ]},
+ {name:'07 – FF&E',note:'FF&E List',children:[{name:'FF&E List',children:[]}]},
+ {name:'08 – Assets',note:'Key Register',children:[{name:'Key Register',children:[]}]},
+ {name:'09 – Defects Liability Period (DLP)',note:'fäm Interior only',children:[]},
+ {name:'10 – Taking-Over Certificate (TOC)',note:'fäm Interior to Client',children:[]},
+ {name:'11 – Handover Certificate',note:'fäm Interior to Client',children:[]}
+]};
+function v606Specialists(){return ['Microcement','Joinery Works','Doors','MEP Works','Glazing Works','Landscape Works','Garage Door','Home Automation','Marbles','Curtains','Gym','Kitchen Equipment','Internal Glass & Mirrors'].map(name=>({name,children:[]}))}
+function snagFloors(){return [
+  {name:'A) Basement Floor',children:['01 Joinery - Artwood','02 Microcement','03 Tiling and Grouting','04 Ceiling Finishes','05 MEP','06 Cinema','07 Joinery and Doors','08 Façade and Glazing'].map(n=>({name:n,children:[]}))},
+  {name:'B) Ground Floor',children:['01 Joinery - Artwood','02 Microcement','03 Tiling and Grouting','04 Ceiling Finishes','05 MEP','06 Marble','07 Joinery and Doors','08 Façade and Glazing'].map(n=>({name:n,children:[]}))},
+  {name:'C) First Floor',children:['01 Joinery - Artwood','02 Microcement','03 Tiling and Grouting','04 Ceiling Finishes','05 MEP','06 Marble','07 Joinery and Doors','08 Façade and Glazing','09 Internal Glass and Mirror'].map(n=>({name:n,children:[]}))},
+  {name:'D) Roof Floor',children:['01 Microcement','02 Tiling and Grouting','03 Ceiling Finishes','04 MEP','05 Marble','06 Façade and Glazing'].map(n=>({name:n,children:[]}))},
+  {name:'E) External',children:['01 MEP','02 Tiling & Grouting','03 Glass','04 Boundary Walls','05 Cladding','06 Luna Wood','07 Swimming Pool','08 Landscaping'].map(n=>({name:n,children:[]}))}
+]}
+let data=clone(defaultData),path=[],editIndex=null;
+function clone(x){return JSON.parse(JSON.stringify(x))}
+function node(){let n=data;path.forEach(i=>n=n.children[i]);return n}
+function init(){
+  try{
+    const s=localStorage.getItem(STORAGE);
+    if(s){
+      const p=JSON.parse(s);
+      data=p.data||data;
+      document.getElementById('projectName').value=p.projectName||'Villa 606';
+      document.getElementById('clientName').value=p.clientName||'Client / Consultant';
+      document.getElementById('dateField').value=p.date||'';
+      applyTextEdits(p.textEdits||{});
+      document.getElementById('saveStatus').textContent='Saved version loaded';
+      document.getElementById('saveStatus').className='saved'
+    }
+  }catch(e){console.warn(e)}
+  updateDriveStatus();
+  render()
+}
+function render(){
+  const n=node(),grid=document.getElementById('grid');
+  document.getElementById('folderTitle').textContent=path.length?n.name:'Main Folders';
+  let crumbs=['Handover Documents'],cur=data;
+  path.forEach(i=>{cur=cur.children[i];crumbs.push(cur.name)});
+  document.getElementById('breadcrumb').textContent=crumbs.join('  /  ');
+  grid.innerHTML='';
+  (n.children||[]).forEach((f,i)=>{
+    const c=document.createElement('div');
+    c.className='card';
+    c.onclick=e=>{if(!e.target.closest('button'))openFolder(i)};
+    c.innerHTML=`<div class="card-actions"><button class="icon-btn" title="Rename" onclick="openEdit(${i})">✎</button><button class="icon-btn" title="Delete" onclick="deleteFolder(${i})">×</button></div><div class="card-folder">▰</div><div class="card-name">${esc(f.name)}</div><div class="card-meta">${esc(f.note||((f.children||[]).length+' subfolder(s)'))}</div><div class="open">Open folder →</div>`;
+    grid.appendChild(c)
+  });
+  (n.files||[]).forEach((f,i)=>{
+    const c=document.createElement('div');
+    c.className='card file-card';
+    c.innerHTML=`<div class="file-icon">📄</div><div class="card-name">${esc(f.name)}</div><div class="card-meta">${esc(f.sizeText||'PDF')} • Google Drive</div><div class="file-actions"><button onclick="viewDriveFile(${i})">View PDF</button><button onclick="downloadDriveFile(${i})">Download</button><button onclick="removeFileRecord(${i})">Remove from Dashboard</button></div>`;
+    grid.appendChild(c)
+  });
+  if(!(n.children||[]).length && !(n.files||[]).length){
+    grid.innerHTML='<div class="empty">This folder is ready for project documents.<br><br>Use <b>＋ Upload PDF</b> to upload an actual PDF file to Google Drive, or <b>＋ Add Folder</b> to extend the structure.</div>'
+  }
+  renderTree()
+}
+function renderTree(){const t=document.getElementById('tree');t.innerHTML=`<div class="tree-item ${path.length?'':'active'}" onclick="goRoot()"><span class="folder-icon">▰</span>Handover Documents</div>`;data.children.forEach((f,i)=>{const x=document.createElement('div');x.className='tree-item '+(path[0]===i?'active':'');x.innerHTML=`<span class="folder-icon">▰</span><span>${esc(f.name)}</span>`;x.onclick=()=>{path=[i];render()};t.appendChild(x)})}
+function openFolder(i){path.push(i);render()}function goRoot(){path=[];render()}
+function openAdd(){editIndex=null;document.getElementById('modalTitle').textContent='Add Folder';document.getElementById('folderInput').value='';document.getElementById('modal').classList.add('show');setTimeout(()=>document.getElementById('folderInput').focus(),20)}
+function openEdit(i){editIndex=i;document.getElementById('modalTitle').textContent='Rename Folder';document.getElementById('folderInput').value=node().children[i].name;document.getElementById('modal').classList.add('show')}
+function closeModal(){document.getElementById('modal').classList.remove('show')}
+function confirmModal(){const v=document.getElementById('folderInput').value.trim();if(!v)return;if(editIndex===null){node().children=node().children||[];node().children.push({name:v,children:[]})}else node().children[editIndex].name=v;closeModal();dirty();render()}
+function deleteFolder(i){if(confirm('Delete “'+node().children[i].name+'” and all its subfolders?')){node().children.splice(i,1);dirty();render()}}
+function getTextEdits(){const out={};document.querySelectorAll('[data-edit-key]').forEach(el=>out[el.dataset.editKey]=el.innerText.trim());return out}
+function applyTextEdits(edits){document.querySelectorAll('[data-edit-key]').forEach(el=>{if(Object.prototype.hasOwnProperty.call(edits,el.dataset.editKey))el.innerText=edits[el.dataset.editKey]})}
+function currentState(){return {data,projectName:val('projectName'),clientName:val('clientName'),date:val('dateField'),textEdits:getTextEdits()}}
+function saveData(){localStorage.setItem(STORAGE,JSON.stringify(currentState()));const s=document.getElementById('saveStatus');s.textContent='Saved in this browser • '+new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});s.className='saved'}
+function dirty(){const s=document.getElementById('saveStatus');s.textContent='Unsaved changes';s.className=''}
+function val(id){return document.getElementById(id).value}
+function exportPDF(){saveData();window.print()}
+function downloadHTML(){
+  saveData();
+  let html='<!DOCTYPE html>\n'+document.documentElement.outerHTML;
+  const stateJson=JSON.stringify(currentState()).replace(/</g,'\\u003c');
+  html=html.replace(/const EMBEDDED_STATE=.*?;/,'const EMBEDDED_STATE='+stateJson+';');
+  const blob=new Blob([html],{type:'text/html'}),a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='Villa_606_Handover_Document_System.html';
+  a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href),1000)
+}
+
+function updateDriveStatus(msg){
+  const el=document.getElementById('driveStatus');if(!el)return;
+  if(msg){el.textContent=msg;return}
+  if(GOOGLE_OAUTH_CLIENT_ID.includes('PASTE_')){
+    el.textContent='Google OAuth Client ID pending';
+    el.className='drive-status';
+  }else if(driveToken){
+    el.textContent='Connected to Google Drive';
+    el.className='drive-status connected';
+  }else{
+    el.textContent='Google Drive ready • click Connect Google Drive';
+    el.className='drive-status';
+  }
+}
+function connectDrive(){
+  if(GOOGLE_OAUTH_CLIENT_ID.includes('PASTE_')){
+    alert('Google OAuth Client ID still needs to be added to this HTML.');
+    return
+  }
+  if(!(window.google&&google.accounts&&google.accounts.oauth2)){
+    alert('Google sign-in is still loading. Wait a moment and try again.');
+    return
+  }
+  tokenClient=google.accounts.oauth2.initTokenClient({
+    client_id:GOOGLE_OAUTH_CLIENT_ID,
+    scope:'https://www.googleapis.com/auth/drive',
+    callback:(resp)=>{
+      if(resp.error){alert('Google Drive sign-in failed: '+resp.error);return}
+      driveToken=resp.access_token;updateDriveStatus()
+    }
+  });
+  tokenClient.requestAccessToken({prompt:'consent'})
+}
+function ensureDriveConnected(){
+  if(!driveToken){connectDrive();return false}
+  return true
+}
+function choosePdf(){
+  if(!ensureDriveConnected())return;
+  document.getElementById('pdfInput').click()
+}
+async function driveJson(url,opts={}){
+  opts.headers=Object.assign({},opts.headers||{},{Authorization:'Bearer '+driveToken});
+  const r=await fetch(url,opts);
+  if(r.status===401){driveToken=null;updateDriveStatus();throw new Error('Google session expired. Connect Google Drive again.')}
+  if(!r.ok){throw new Error(await r.text()||('Google Drive error '+r.status))}
+  return r.json()
+}
+async function getOrCreateFolder(parentId,name){
+  const safeName=name.replace(/'/g,"\\'");
+  const q=`name='${safeName}' and '${parentId}' in parents and mimeType='application/vnd.google-apps.folder' and trashed=false`;
+  const found=await driveJson('https://www.googleapis.com/drive/v3/files?q='+encodeURIComponent(q)+'&fields=files(id,name)&spaces=drive');
+  if(found.files&&found.files.length)return found.files[0].id;
+  const made=await driveJson('https://www.googleapis.com/drive/v3/files?fields=id,name',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({name:name,mimeType:'application/vnd.google-apps.folder',parents:[parentId]})
+  });
+  return made.id
+}
+async function resolveCurrentDriveFolder(){
+  let parent=DRIVE_ROOT_FOLDER_ID,cur=data;
+  for(const idx of path){
+    cur=cur.children[idx];
+    parent=await getOrCreateFolder(parent,cur.name)
+  }
+  return parent
+}
+function formatBytes(bytes){
+  if(!bytes)return 'PDF';
+  const units=['B','KB','MB','GB'];let n=Number(bytes),i=0;
+  while(n>=1024&&i<units.length-1){n/=1024;i++}
+  return (i?(n>=10?n.toFixed(1):n.toFixed(2)):n)+' '+units[i]
+}
+async function uploadSelectedPdf(ev){
+  const file=ev.target.files&&ev.target.files[0];ev.target.value='';
+  if(!file)return;
+  if(file.type!=='application/pdf'&&!file.name.toLowerCase().endsWith('.pdf')){
+    alert('Please select a PDF file.');
+    return
+  }
+  if(!ensureDriveConnected())return;
+  try{
+    updateDriveStatus('Uploading '+file.name+'…');
+    document.querySelector('.panel').classList.add('uploading');
+    const parentId=await resolveCurrentDriveFolder();
+    const boundary='-------famBoundary'+Date.now();
+    const meta={name:file.name,mimeType:'application/pdf',parents:[parentId]};
+    const body=new Blob([
+      '--'+boundary+'\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n',
+      JSON.stringify(meta),
+      '\r\n--'+boundary+'\r\nContent-Type: application/pdf\r\n\r\n',
+      file,
+      '\r\n--'+boundary+'--'
+    ],{type:'multipart/related; boundary='+boundary});
+    const r=await fetch('https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&fields=id,name,size,webViewLink',{
+      method:'POST',
+      headers:{Authorization:'Bearer '+driveToken,'Content-Type':'multipart/related; boundary='+boundary},
+      body:body
+    });
+    if(!r.ok)throw new Error(await r.text());
+    const info=await r.json();
+    node().files=node().files||[];
+    node().files.push({id:info.id,name:info.name||file.name,size:info.size||file.size,sizeText:formatBytes(info.size||file.size),webViewLink:info.webViewLink||''});
+    saveData();render();updateDriveStatus('Document uploaded successfully ✓');
+    setTimeout(()=>updateDriveStatus(),2200)
+  }catch(e){
+    console.error(e);
+    alert('Upload failed. '+e.message);
+    updateDriveStatus()
+  }finally{
+    document.querySelector('.panel').classList.remove('uploading')
+  }
+}
+async function fetchDriveBlob(id){
+  if(!ensureDriveConnected())throw new Error('Connect Google Drive first.');
+  const r=await fetch('https://www.googleapis.com/drive/v3/files/'+encodeURIComponent(id)+'?alt=media',{headers:{Authorization:'Bearer '+driveToken}});
+  if(r.status===401){driveToken=null;updateDriveStatus();throw new Error('Google session expired. Connect Google Drive again.')}
+  if(!r.ok)throw new Error(await r.text());
+  return r.blob()
+}
+async function viewDriveFile(i){
+  try{
+    const f=(node().files||[])[i];
+    const blob=await fetchDriveBlob(f.id);
+    const url=URL.createObjectURL(blob);
+    const w=window.open(url,'_blank');
+    if(!w){URL.revokeObjectURL(url);alert('Your browser blocked the PDF window. Allow pop-ups and try again.')}
+    else setTimeout(()=>URL.revokeObjectURL(url),60000)
+  }catch(e){alert(e.message)}
+}
+async function downloadDriveFile(i){
+  try{
+    const f=(node().files||[])[i];
+    const blob=await fetchDriveBlob(f.id);
+    const url=URL.createObjectURL(blob),a=document.createElement('a');
+    a.href=url;a.download=f.name||'document.pdf';a.click();
+    setTimeout(()=>URL.revokeObjectURL(url),1500)
+  }catch(e){alert(e.message)}
+}
+function removeFileRecord(i){
+  const f=(node().files||[])[i];
+  if(confirm('Remove “'+f.name+'” from this dashboard?\n\nThe actual PDF will remain in Google Drive.')){
+    node().files.splice(i,1);saveData();render()
+  }
+}
+function esc(s){return String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}function attr(s){return esc(s)}
+document.getElementById('folderInput').addEventListener('keydown',e=>{if(e.key==='Enter')confirmModal()});document.getElementById('modal').addEventListener('click',e=>{if(e.target.id==='modal')closeModal()});init();
+</script>
+
+
+</body></html>
