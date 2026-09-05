@@ -54,9 +54,9 @@
 <div class="shell">
   <header>
     <div class="brand"><div class="mark"><b contenteditable="true" data-edit-key="brandName" oninput="dirty()">fäm</b> <span contenteditable="true" data-edit-key="brandDivision" oninput="dirty()">interior</span></div><div class="divider"></div><div><div class="eyebrow" contenteditable="true" data-edit-key="eyebrow" oninput="dirty()">Project Closeout</div><div class="title" contenteditable="true" data-edit-key="reportTitle" oninput="dirty()">Villa 606 Handover Document System</div></div></div>
-    <div class="actions"><button class="btn" onclick="connectDrive()">Connect Google Drive</button><button class="btn" onclick="saveData()">Save Changes</button><button class="btn light" onclick="downloadHTML()">Save &amp; Download HTML</button><button class="btn gold" onclick="exportPDF()">Export to PDF</button></div>
+    <div class="actions"><button class="btn" id="driveConnectBtn" id="driveConnectBtn" onclick="connectDrive()">Connect Google Drive</button><button class="btn" onclick="saveData()">Save Changes</button><button class="btn light" onclick="downloadHTML()">Save &amp; Download HTML</button><button class="btn gold" onclick="exportPDF()">Export to PDF</button></div>
   </header>
-  <div class="notice"><span contenteditable="true" data-edit-key="guidance" oninput="dirty()">Live document control system — open a folder to upload, view and download project documents stored in Google Drive.</span><span id="saveStatus" class="saved">Ready • connect Google Drive to synchronize</span></div>
+  <div class="notice"><span contenteditable="true" data-edit-key="guidance" oninput="dirty()">Live document control system — Google Drive synchronizes automatically after connection. Open a folder to upload, view and download project documents.</span><span id="saveStatus" class="saved">Ready • connect Google Drive to synchronize</span></div>
   <section class="project">
     <div><label contenteditable="true" data-edit-key="projectLabel" oninput="dirty()">Project Name</label><input id="projectName" value="Villa 606" oninput="dirty()"></div>
     <div><label contenteditable="true" data-edit-key="clientLabel" oninput="dirty()">Prepared For</label><input id="clientName" value="Client / Consultant" oninput="dirty()"></div>
@@ -200,6 +200,10 @@ function snagFloors(){return [
 ]}
 
 const CONFIG_FILE_NAME='_villa606_system_state.json';
+const SESSION_TOKEN_KEY='villa606DriveAccessToken';
+const SESSION_TOKEN_EXPIRY_KEY='villa606DriveAccessTokenExpiry';
+const AUTO_SYNC_INTERVAL_MS=5*60*1000; // every 5 minutes while the page is open
+let autoSyncTimer=null, autoSyncHooksInstalled=false;
 
 let configFileId=null;
 let path=[], editIndex=null, syncing=false, autoSaveTimer=null, searchTerm='';
@@ -510,7 +514,11 @@ function downloadHTML(){
 
 function updateDriveStatus(msg){
   const el=document.getElementById('driveStatus');if(!el)return;
-  if(msg){el.textContent=msg;return}
+  if(msg){
+    el.textContent=msg;
+    el.className=driveToken?'drive-status connected':'drive-status';
+    return
+  }
   if(driveToken){
     el.textContent='Connected to Google Drive • shared live data';
     el.className='drive-status connected'
@@ -525,29 +533,178 @@ function friendlyError(e){
   if(s.includes('403'))return 'This Google account does not have permission for this Drive item.';
   return s.length>280?s.slice(0,280)+'…':s
 }
-function connectDrive(){
-  if(!(window.google&&google.accounts&&google.accounts.oauth2)){
-    alert('Google sign-in is still loading. Wait a moment and try again.');return
+function cacheDriveSession(token,expiresInSeconds){
+  try{
+    const safeSeconds=Math.max(60,Number(expiresInSeconds||3600)-60);
+    sessionStorage.setItem(SESSION_TOKEN_KEY,token);
+    sessionStorage.setItem(SESSION_TOKEN_EXPIRY_KEY,String(Date.now()+safeSeconds*1000));
+  }catch(e){console.warn('Could not cache Google session',e)}
+}
+function clearDriveSession(){
+  try{sessionStorage.removeItem(SESSION_TOKEN_KEY);sessionStorage.removeItem(SESSION_TOKEN_EXPIRY_KEY)}catch(e){}
+}
+function restoreDriveSessionToken(){
+  try{
+    const token=sessionStorage.getItem(SESSION_TOKEN_KEY);
+    const expiry=Number(sessionStorage.getItem(SESSION_TOKEN_EXPIRY_KEY)||0);
+    if(token&&expiry>Date.now()+30000)return token;
+  }catch(e){}
+  clearDriveSession();
+  return null
+}
+function installAutoSync(){
+  if(autoSyncTimer)clearInterval(autoSyncTimer);
+  autoSyncTimer=setInterval(()=>{
+    if(driveToken&&document.visibilityState==='visible')syncAllFromDrive(true)
+  },AUTO_SYNC_INTERVAL_MS);
+  if(!autoSyncHooksInstalled){
+    autoSyncHooksInstalled=true;
+    window.addEventListener('focus',()=>{
+      if(!driveToken||syncing)return;
+      const age=lastSyncAt?Date.now()-new Date(lastSyncAt).getTime():Infinity;
+      if(age>30000)syncAllFromDrive(true)
+    });
+    document.addEventListener('visibilitychange',()=>{
+      if(document.visibilityState!=='visible'||!driveToken||syncing)return;
+      const age=lastSyncAt?Date.now()-new Date(lastSyncAt).getTime():Infinity;
+      if(age>30000)syncAllFromDrive(true)
+    })
   }
+}
+async function restoreAndSyncDriveSession(){
+  const cached=restoreDriveSessionToken();
+  if(!cached)return false;
+  driveToken=cached;
+  setConnectButton('Drive Connected');
+  updateDriveStatus('Restoring Google Drive session • synchronizing…');
+  try{
+    await verifyDriveAccess();
+    try{await loadCloudState()}catch(e){console.warn('Shared state load skipped during automatic restore',e)}
+    await syncAllFromDrive(true);
+    installAutoSync();
+    updateDriveStatus();
+    setSaveStatus('Automatically synchronized with Google Drive');
+    return true
+  }catch(e){
+    console.warn('Cached Google Drive session could not be restored',e);
+    driveToken=null;clearDriveSession();
+    setConnectButton('Connect Google Drive');updateDriveStatus();
+    return false
+  }
+}
+
+async function waitForGoogleIdentity(timeoutMs=12000){
+  const started=Date.now();
+  while(Date.now()-started<timeoutMs){
+    if(window.google&&google.accounts&&google.accounts.oauth2)return true;
+    await new Promise(r=>setTimeout(r,200))
+  }
+  return false
+}
+
+function setConnectButton(text,disabled=false){
+  const b=document.getElementById('driveConnectBtn');
+  if(!b)return;
+  b.textContent=text;
+  b.disabled=disabled;
+  b.style.opacity=disabled?'.7':''
+}
+
+async function verifyDriveAccess(){
+  return driveJson('https://www.googleapis.com/drive/v3/files/'+encodeURIComponent(DRIVE_ROOT_FOLDER_ID)+'?fields=id,name,mimeType,trashed')
+}
+
+async function connectDrive(){
+  if(driveToken){
+    updateDriveStatus('Connected • refreshing Villa 606 from Google Drive…');
+    await syncAllFromDrive();
+    return
+  }
+
+  setConnectButton('Connecting…',true);
+  setSaveStatus('Opening Google authorization…',false);
+  updateDriveStatus('Waiting for Google sign-in…');
+
+  const ready=await waitForGoogleIdentity();
+  if(!ready){
+    setConnectButton('Connect Google Drive');
+    updateDriveStatus('Google sign-in could not load');
+    setSaveStatus('Google sign-in unavailable • reload the page and try again',false);
+    alert('Google sign-in could not load on this browser. Reload the page, make sure pop-ups are allowed for this site, then tap Connect Google Drive again.');
+    return
+  }
+
   tokenClient=google.accounts.oauth2.initTokenClient({
     client_id:GOOGLE_OAUTH_CLIENT_ID,
     scope:'https://www.googleapis.com/auth/drive',
     callback:async(resp)=>{
-      if(resp.error){alert('Google Drive sign-in failed: '+resp.error);return}
+      if(resp.error){
+        setConnectButton('Connect Google Drive');
+        updateDriveStatus('Google Drive authorization failed');
+        setSaveStatus('Google authorization failed',false);
+        alert('Google Drive sign-in failed: '+resp.error);
+        return
+      }
+
       driveToken=resp.access_token;
-      updateDriveStatus('Connected • loading shared Villa 606 data…');
+      cacheDriveSession(resp.access_token,resp.expires_in);
+      setConnectButton('Drive Connected');
+      updateDriveStatus('Connected • verifying Villa 606 Drive access…');
+
       try{
-        await loadCloudState();
+        const root=await verifyDriveAccess();
+        if(!root||root.trashed)throw new Error('Villa 606 root folder is unavailable or in Trash.');
+
+        // Cloud state is useful for shared project fields/status, but a bad or stale
+        // config must never prevent a fresh device from rebuilding from Drive.
+        try{
+          await loadCloudState();
+        }catch(stateError){
+          console.warn('Shared state load skipped; rebuilding from Drive.',stateError);
+          data=mergePersisted(defaultData,null);
+          path=[];
+          render()
+        }
+
         await syncAllFromDrive();
         updateDriveStatus();
-        setSaveStatus('Synchronized with Google Drive')
+        setSaveStatus('Synchronized with Google Drive • automatic sync is on');
+        setConnectButton('Drive Connected');
+        installAutoSync()
       }catch(e){
-        console.error(e);updateDriveStatus();
-        alert('Connected, but synchronization failed. '+friendlyError(e))
+        console.error(e);
+        const msg=friendlyError(e);
+        updateDriveStatus('Connected • synchronization needs attention');
+        setSaveStatus('Drive connected • synchronization failed',false);
+        setConnectButton('Retry Drive Sync');
+        alert('Google Drive connected, but Villa 606 synchronization failed. '+msg)
+      }
+    },
+    error_callback:(err)=>{
+      console.error('Google OAuth popup error',err);
+      setConnectButton('Connect Google Drive');
+      updateDriveStatus('Google authorization window did not complete');
+      setSaveStatus('Google authorization did not complete',false);
+      const type=err&&err.type?err.type:'authorization_window_error';
+      if(type==='popup_failed_to_open'){
+        alert('Your browser blocked the Google sign-in window. Allow pop-ups for this site, then tap Connect Google Drive again.');
+      }else if(type==='popup_closed'){
+        alert('Google sign-in was closed before authorization finished. Tap Connect Google Drive and complete the Google sign-in.');
+      }else{
+        alert('Google sign-in could not complete on this browser ('+type+'). Reload the page and try again.')
       }
     }
   });
-  tokenClient.requestAccessToken({prompt:'consent'})
+
+  try{
+    tokenClient.requestAccessToken({prompt:'select_account'})
+  }catch(e){
+    console.error(e);
+    setConnectButton('Connect Google Drive');
+    updateDriveStatus('Could not open Google authorization');
+    setSaveStatus('Google authorization could not start',false);
+    alert('Could not open Google sign-in. Reload the page and make sure pop-ups are allowed for this site.')
+  }
 }
 function ensureDriveConnected(){
   if(!driveToken){connectDrive();return false}
@@ -564,7 +721,7 @@ function choosePdf(){
 async function driveJson(url,opts={}){
   opts.headers=Object.assign({},opts.headers||{},{Authorization:'Bearer '+driveToken});
   const r=await fetch(url,opts);
-  if(r.status===401){driveToken=null;updateDriveStatus();throw new Error('401 Google session expired.')}
+  if(r.status===401){driveToken=null;clearDriveSession();updateDriveStatus();setConnectButton('Connect Google Drive');throw new Error('401 Google session expired.')}
   if(!r.ok)throw new Error(`${r.status} ${await r.text()||'Google Drive request failed'}`);
   if(r.status===204)return {};
   return r.json()
@@ -652,7 +809,7 @@ async function syncNodeRecursive(target,parentId,isRoot=false){
     if(child.driveId)await syncNodeRecursive(child,child.driveId,false)
   }
 }
-async function syncAllFromDrive(){
+async function syncAllFromDrive(silent=false){
   if(!driveToken){alert('Connect Google Drive first.');return}
   if(syncing)return;
   syncing=true;
@@ -664,12 +821,17 @@ async function syncAllFromDrive(){
     lastSyncAt=new Date().toISOString();
     localStorage.setItem(STORAGE,JSON.stringify(currentState()));
     render();
-    await saveCloudState(currentState());
+    try{
+      await saveCloudState(currentState());
+    }catch(stateSaveError){
+      console.warn('Drive documents synchronized, but shared state save failed.',stateSaveError);
+      setSaveStatus('Documents synchronized • shared settings save needs attention',false)
+    }
     document.getElementById('searchSummary').textContent='Last full sync: '+formatDate(lastSyncAt);
     updateDriveStatus('Full synchronization complete ✓');
     setTimeout(()=>updateDriveStatus(),1800)
   }catch(e){
-    console.error(e);alert('Full synchronization failed. '+friendlyError(e));updateDriveStatus()
+    console.error(e);if(!silent)alert('Full synchronization failed. '+friendlyError(e));updateDriveStatus()
   }finally{
     panel.classList.remove('uploading');syncing=false
   }
@@ -742,7 +904,7 @@ async function multipartUpload(file,parentId,existingId=null){
     headers:{Authorization:'Bearer '+driveToken,'Content-Type':'multipart/related; boundary='+boundary},
     body
   });
-  if(r.status===401){driveToken=null;updateDriveStatus();throw new Error('401 Google session expired.')}
+  if(r.status===401){driveToken=null;clearDriveSession();updateDriveStatus();setConnectButton('Connect Google Drive');throw new Error('401 Google session expired.')}
   if(!r.ok)throw new Error(`${r.status} ${await r.text()}`);
   return r.json()
 }
@@ -777,7 +939,7 @@ function viewDriveFile(i){
 async function fetchDriveBlob(id){
   if(!ensureDriveConnected())throw new Error('Connect Google Drive first.');
   const r=await fetch('https://www.googleapis.com/drive/v3/files/'+encodeURIComponent(id)+'?alt=media',{headers:{Authorization:'Bearer '+driveToken}});
-  if(r.status===401){driveToken=null;updateDriveStatus();throw new Error('401 Google session expired.')}
+  if(r.status===401){driveToken=null;clearDriveSession();updateDriveStatus();setConnectButton('Connect Google Drive');throw new Error('401 Google session expired.')}
   if(!r.ok)throw new Error(`${r.status} ${await r.text()}`);
   return r.blob()
 }
@@ -809,8 +971,10 @@ function init(){
     }
   }catch(e){console.warn(e)}
   updateDriveStatus();
+  setConnectButton('Connect Google Drive');
   render();
-  document.getElementById('searchSummary').textContent=lastSyncAt?'Last full sync: '+formatDate(lastSyncAt):'Connect Google Drive to synchronize the full project.'
+  document.getElementById('searchSummary').textContent=lastSyncAt?'Last full sync: '+formatDate(lastSyncAt):'Connect Google Drive once on this device. After connection, synchronization runs automatically.';
+  setTimeout(()=>restoreAndSyncDriveSession(),350)
 }
 document.getElementById('folderInput').addEventListener('keydown',e=>{if(e.key==='Enter')confirmModal()});
 document.getElementById('modal').addEventListener('click',e=>{if(e.target.id==='modal')closeModal()});
