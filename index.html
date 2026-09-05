@@ -19,6 +19,31 @@
     .workspace{display:grid;grid-template-columns:310px 1fr;gap:16px;min-height:620px}.sidebar,.panel{background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 6px 18px rgba(30,29,27,.04);overflow:hidden}.sidebar-head,.panel-head{padding:18px 19px;border-bottom:1px solid var(--line)}
     h2{font-size:13px;text-transform:uppercase;letter-spacing:1.5px;margin:0}.subtle{font-size:12px;color:var(--muted);margin-top:6px}.tree{padding:10px}.tree-item{display:flex;align-items:center;gap:10px;padding:11px 10px;border-radius:8px;color:#55514c;font-size:13px}.tree-item.active{background:#ede8df;color:#242321;font-weight:700}.tree-item:hover{background:#f5f2ec}.folder-icon{color:var(--gold);font-size:18px}.panel-head{display:flex;align-items:center;justify-content:space-between;gap:15px}.breadcrumb{font-size:12px;color:var(--muted);margin-bottom:5px}.folder-title{font-size:22px}.add{background:var(--charcoal);color:#fff;border:0;border-radius:8px;padding:9px 12px}.content{padding:18px}.grid{display:grid;grid-template-columns:repeat(3,minmax(190px,1fr));gap:14px}.card{position:relative;border:1px solid var(--line);border-radius:12px;padding:18px;background:#fff;min-height:145px;transition:.2s;display:flex;flex-direction:column}.card:hover{transform:translateY(-2px);box-shadow:0 10px 25px rgba(25,24,22,.09);border-color:#c8bda9}.card-folder{font-size:31px;color:var(--gold);margin-bottom:14px}.card-name{font-size:14px;font-weight:700;line-height:1.3}.card-meta{font-size:11px;color:var(--muted);margin-top:7px}.open{margin-top:auto;padding-top:14px;font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#806c4a}.card-actions{position:absolute;right:8px;top:8px;display:flex;gap:4px}.icon-btn{width:25px;height:25px;border:0;border-radius:6px;background:#f1eee8;color:#615d56;display:none}.card:hover .icon-btn{display:block}.empty{text-align:center;padding:90px 20px;color:var(--muted)}
     .modal{position:fixed;inset:0;background:rgba(10,10,10,.52);display:none;align-items:center;justify-content:center;padding:20px;z-index:10}.modal.show{display:flex}.dialog{width:min(480px,100%);background:white;border-radius:15px;padding:23px;box-shadow:0 24px 70px rgba(0,0,0,.3)}.dialog h3{margin:0 0 18px}.dialog-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:22px}.dialog .btn{color:#333;border-color:var(--line)}.dialog .btn.gold{color:#181714}.file-card{border-left:4px solid var(--gold)}.file-icon{font-size:30px;margin-bottom:14px}.file-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:auto;padding-top:14px}.file-actions button{border:1px solid var(--line);background:#faf8f4;border-radius:7px;padding:7px 9px;font-size:11px}.file-actions button:hover{background:#eee9df}.drive-status{font-size:11px;color:#8b867e;margin-top:5px}.drive-status.connected{color:#55705d;font-weight:700}.uploading{opacity:.6;pointer-events:none}
+
+    .opsbar{display:grid;grid-template-columns:repeat(4,minmax(135px,1fr));gap:10px;padding:14px 18px;border-bottom:1px solid var(--line);background:#faf8f4}
+    .metric{border:1px solid var(--line);background:white;border-radius:10px;padding:12px 13px;min-width:0}
+    .metric-label{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--muted)}
+    .metric-value{font-size:23px;font-weight:700;margin-top:4px;line-height:1}
+    .metric-sub{font-size:10px;color:var(--muted);margin-top:6px}
+    .toolbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:12px 18px;border-bottom:1px solid var(--line)}
+    .search-wrap{flex:1;min-width:210px;position:relative}
+    .search-wrap input{border:1px solid var(--line);border-radius:8px;padding:9px 11px;background:white}
+    .status-pill{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:999px;padding:4px 8px;font-size:10px;font-weight:700;margin-top:9px;width:max-content;max-width:100%}
+    .status-pending{background:#f7f3eb;color:#796848}
+    .status-populated{background:#edf3ee;color:#55705d}
+    .status-complete{background:#e7eee8;color:#3e5d47}
+    .locked{font-size:10px;color:#8b867e;margin-left:5px}
+    .file-date{font-size:10px;color:var(--muted);margin-top:4px}
+    .progressline{height:6px;background:#ece8e0;border-radius:999px;overflow:hidden;margin-top:8px}
+    .progressfill{height:100%;background:var(--gold);width:0}
+    .current-folder-tools{display:flex;gap:7px;flex-wrap:wrap;align-items:center}
+    .mini-btn{border:1px solid var(--line);background:#fff;border-radius:8px;padding:8px 10px;font-size:11px;color:var(--ink)}
+    .mini-btn:hover{background:#f4f1eb}
+    .search-results{padding:6px 18px 14px;font-size:11px;color:var(--muted)}
+    .search-highlight{box-shadow:0 0 0 2px rgba(183,154,104,.45)}
+    @media(max-width:900px){.opsbar{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:560px){.opsbar{grid-template-columns:1fr 1fr}.metric-value{font-size:19px}.toolbar{align-items:stretch}.search-wrap{min-width:100%}}
+
     footer{text-align:center;color:#8b867e;font-size:10px;letter-spacing:1px;padding:18px}
     @media(max-width:900px){header{align-items:flex-start;flex-direction:column}.actions{justify-content:flex-start}.project{grid-template-columns:1fr}.workspace{grid-template-columns:1fr}.sidebar{display:none}.grid{grid-template-columns:repeat(2,1fr)}}
     @media(max-width:560px){.shell{padding:10px}.grid{grid-template-columns:1fr}.mark{font-size:28px}.divider{display:none}.actions .btn{padding:9px 10px;font-size:12px}}
@@ -31,7 +56,7 @@
     <div class="brand"><div class="mark"><b contenteditable="true" data-edit-key="brandName" oninput="dirty()">fäm</b> <span contenteditable="true" data-edit-key="brandDivision" oninput="dirty()">interior</span></div><div class="divider"></div><div><div class="eyebrow" contenteditable="true" data-edit-key="eyebrow" oninput="dirty()">Project Closeout</div><div class="title" contenteditable="true" data-edit-key="reportTitle" oninput="dirty()">Villa 606 Handover Document System</div></div></div>
     <div class="actions"><button class="btn" onclick="connectDrive()">Connect Google Drive</button><button class="btn" onclick="saveData()">Save Changes</button><button class="btn light" onclick="downloadHTML()">Save &amp; Download HTML</button><button class="btn gold" onclick="exportPDF()">Export to PDF</button></div>
   </header>
-  <div class="notice"><span contenteditable="true" data-edit-key="guidance" oninput="dirty()">Live document control system — open a folder to upload, view and download project documents stored in Google Drive.</span><span id="saveStatus" class="saved">Saved in this browser • 10:43 AM</span></div>
+  <div class="notice"><span contenteditable="true" data-edit-key="guidance" oninput="dirty()">Live document control system — open a folder to upload, view and download project documents stored in Google Drive.</span><span id="saveStatus" class="saved">Ready • connect Google Drive to synchronize</span></div>
   <section class="project">
     <div><label contenteditable="true" data-edit-key="projectLabel" oninput="dirty()">Project Name</label><input id="projectName" value="Villa 606" oninput="dirty()"></div>
     <div><label contenteditable="true" data-edit-key="clientLabel" oninput="dirty()">Prepared For</label><input id="clientName" value="Client / Consultant" oninput="dirty()"></div>
@@ -39,7 +64,33 @@
   </section>
   <main class="workspace">
     <aside class="sidebar"><div class="sidebar-head"><h2>Folder Directory</h2><div class="subtle">Master handover index</div></div><div class="tree" id="tree"><div class="tree-item active" onclick="goRoot()"><span class="folder-icon">▰</span>Handover Documents</div><div class="tree-item "><span class="folder-icon">▰</span><span>01 – Authority Approvals</span></div><div class="tree-item "><span class="folder-icon">▰</span><span>02 – O&amp;M Manuals</span></div><div class="tree-item "><span class="folder-icon">▰</span><span>03 – Warranties</span></div><div class="tree-item "><span class="folder-icon">▰</span><span>04 – Snagging</span></div><div class="tree-item "><span class="folder-icon">▰</span><span>05 – Testing &amp; Commissioning</span></div><div class="tree-item "><span class="folder-icon">▰</span><span>06 – As-Built Drawings</span></div><div class="tree-item "><span class="folder-icon">▰</span><span>07 – FF&amp;E</span></div><div class="tree-item "><span class="folder-icon">▰</span><span>08 – Assets</span></div><div class="tree-item "><span class="folder-icon">▰</span><span>09 – Defects Liability Period (DLP)</span></div><div class="tree-item "><span class="folder-icon">▰</span><span>10 – Taking-Over Certificate (TOC)</span></div><div class="tree-item "><span class="folder-icon">▰</span><span>11 – Handover Certificate</span></div></div></aside>
-    <section class="panel"><div class="panel-head"><div><div class="breadcrumb" id="breadcrumb">Handover Documents</div><div class="folder-title" id="folderTitle">Main Folders</div><div id="driveStatus" class="drive-status">Google Drive not connected</div></div><div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end"><button class="add" onclick="choosePdf()">＋ Upload PDF</button><button class="add" onclick="openAdd()">＋ Add Folder</button><input id="pdfInput" type="file" accept="application/pdf,.pdf" style="display:none" onchange="uploadSelectedPdf(event)"></div></div><div class="content"><div class="grid" id="grid"><div class="card"><div class="card-actions"><button class="icon-btn" title="Rename" onclick="openEdit(0)">✎</button><button class="icon-btn" title="Delete" onclick="deleteFolder(0)">×</button></div><div class="card-folder">▰</div><div class="card-name">01 – Authority Approvals</div><div class="card-meta">Approved authority documents</div><div class="open">Open folder →</div></div><div class="card"><div class="card-actions"><button class="icon-btn" title="Rename" onclick="openEdit(1)">✎</button><button class="icon-btn" title="Delete" onclick="deleteFolder(1)">×</button></div><div class="card-folder">▰</div><div class="card-name">02 – O&amp;M Manuals</div><div class="card-meta">Folder per specialist</div><div class="open">Open folder →</div></div><div class="card"><div class="card-actions"><button class="icon-btn" title="Rename" onclick="openEdit(2)">✎</button><button class="icon-btn" title="Delete" onclick="deleteFolder(2)">×</button></div><div class="card-folder">▰</div><div class="card-name">03 – Warranties</div><div class="card-meta">Folder per specialist</div><div class="open">Open folder →</div></div><div class="card"><div class="card-actions"><button class="icon-btn" title="Rename" onclick="openEdit(3)">✎</button><button class="icon-btn" title="Delete" onclick="deleteFolder(3)">×</button></div><div class="card-folder">▰</div><div class="card-name">04 – Snagging</div><div class="card-meta">Snag / De-snag / Final Inspection per floor</div><div class="open">Open folder →</div></div><div class="card"><div class="card-actions"><button class="icon-btn" title="Rename" onclick="openEdit(4)">✎</button><button class="icon-btn" title="Delete" onclick="deleteFolder(4)">×</button></div><div class="card-folder">▰</div><div class="card-name">05 – Testing &amp; Commissioning</div><div class="card-meta">MEP T&amp;C by section</div><div class="open">Open folder →</div></div><div class="card"><div class="card-actions"><button class="icon-btn" title="Rename" onclick="openEdit(5)">✎</button><button class="icon-btn" title="Delete" onclick="deleteFolder(5)">×</button></div><div class="card-folder">▰</div><div class="card-name">06 – As-Built Drawings</div><div class="card-meta">Basebuild, Post-Tension &amp; Fitout</div><div class="open">Open folder →</div></div><div class="card"><div class="card-actions"><button class="icon-btn" title="Rename" onclick="openEdit(6)">✎</button><button class="icon-btn" title="Delete" onclick="deleteFolder(6)">×</button></div><div class="card-folder">▰</div><div class="card-name">07 – FF&amp;E</div><div class="card-meta">FF&amp;E List</div><div class="open">Open folder →</div></div><div class="card"><div class="card-actions"><button class="icon-btn" title="Rename" onclick="openEdit(7)">✎</button><button class="icon-btn" title="Delete" onclick="deleteFolder(7)">×</button></div><div class="card-folder">▰</div><div class="card-name">08 – Assets</div><div class="card-meta">Key Register</div><div class="open">Open folder →</div></div><div class="card"><div class="card-actions"><button class="icon-btn" title="Rename" onclick="openEdit(8)">✎</button><button class="icon-btn" title="Delete" onclick="deleteFolder(8)">×</button></div><div class="card-folder">▰</div><div class="card-name">09 – Defects Liability Period (DLP)</div><div class="card-meta">fäm Interior only</div><div class="open">Open folder →</div></div><div class="card"><div class="card-actions"><button class="icon-btn" title="Rename" onclick="openEdit(9)">✎</button><button class="icon-btn" title="Delete" onclick="deleteFolder(9)">×</button></div><div class="card-folder">▰</div><div class="card-name">10 – Taking-Over Certificate (TOC)</div><div class="card-meta">fäm Interior to Client</div><div class="open">Open folder →</div></div><div class="card"><div class="card-actions"><button class="icon-btn" title="Rename" onclick="openEdit(10)">✎</button><button class="icon-btn" title="Delete" onclick="deleteFolder(10)">×</button></div><div class="card-folder">▰</div><div class="card-name">11 – Handover Certificate</div><div class="card-meta">fäm Interior to Client</div><div class="open">Open folder →</div></div></div></div></section>
+    <section class="panel">
+      <div class="panel-head">
+        <div>
+          <div class="breadcrumb" id="breadcrumb">Handover Documents</div>
+          <div class="folder-title" id="folderTitle">Main Folders</div>
+          <div id="driveStatus" class="drive-status">Google Drive not connected</div>
+        </div>
+        <div class="current-folder-tools">
+          <button class="mini-btn" id="completeBtn" onclick="toggleCurrentComplete()" style="display:none">Mark Complete</button>
+          <button class="add" onclick="syncAllFromDrive()">↻ Sync All</button>
+          <button class="add" onclick="choosePdf()">＋ Upload PDF</button>
+          <button class="add" onclick="openAdd()">＋ Add Folder</button>
+          <input id="pdfInput" type="file" accept="application/pdf,.pdf" style="display:none" onchange="uploadSelectedPdf(event)">
+        </div>
+      </div>
+      <div class="opsbar">
+        <div class="metric"><div class="metric-label">Total Documents</div><div class="metric-value" id="metricDocs">0</div><div class="metric-sub">PDFs synchronized from Drive</div></div>
+        <div class="metric"><div class="metric-label">Folders With Documents</div><div class="metric-value" id="metricPopulated">0</div><div class="metric-sub" id="metricPopulatedSub">of 0 required folders</div></div>
+        <div class="metric"><div class="metric-label">Outstanding Folders</div><div class="metric-value" id="metricOutstanding">0</div><div class="metric-sub">required folders without a PDF</div></div>
+        <div class="metric"><div class="metric-label">Document Coverage</div><div class="metric-value" id="metricCoverage">0%</div><div class="progressline"><div class="progressfill" id="coverageFill"></div></div></div>
+      </div>
+      <div class="toolbar">
+        <div class="search-wrap"><input id="searchInput" type="search" placeholder="Search folders or PDF filenames…" oninput="applySearch(this.value)"></div>
+        <button class="mini-btn" onclick="clearSearch()">Clear Search</button>
+      </div>
+      <div class="search-results" id="searchSummary">Connect Google Drive to synchronize the full project.</div>
+      <div class="content"><div class="grid" id="grid"><div class="card"><div class="card-actions"><button class="icon-btn" title="Rename" onclick="openEdit(0)">✎</button><button class="icon-btn" title="Delete" onclick="deleteFolder(0)">×</button></div><div class="card-folder">▰</div><div class="card-name">01 – Authority Approvals</div><div class="card-meta">Approved authority documents</div><div class="open">Open folder →</div></div><div class="card"><div class="card-actions"><button class="icon-btn" title="Rename" onclick="openEdit(1)">✎</button><button class="icon-btn" title="Delete" onclick="deleteFolder(1)">×</button></div><div class="card-folder">▰</div><div class="card-name">02 – O&amp;M Manuals</div><div class="card-meta">Folder per specialist</div><div class="open">Open folder →</div></div><div class="card"><div class="card-actions"><button class="icon-btn" title="Rename" onclick="openEdit(2)">✎</button><button class="icon-btn" title="Delete" onclick="deleteFolder(2)">×</button></div><div class="card-folder">▰</div><div class="card-name">03 – Warranties</div><div class="card-meta">Folder per specialist</div><div class="open">Open folder →</div></div><div class="card"><div class="card-actions"><button class="icon-btn" title="Rename" onclick="openEdit(3)">✎</button><button class="icon-btn" title="Delete" onclick="deleteFolder(3)">×</button></div><div class="card-folder">▰</div><div class="card-name">04 – Snagging</div><div class="card-meta">Snag / De-snag / Final Inspection per floor</div><div class="open">Open folder →</div></div><div class="card"><div class="card-actions"><button class="icon-btn" title="Rename" onclick="openEdit(4)">✎</button><button class="icon-btn" title="Delete" onclick="deleteFolder(4)">×</button></div><div class="card-folder">▰</div><div class="card-name">05 – Testing &amp; Commissioning</div><div class="card-meta">MEP T&amp;C by section</div><div class="open">Open folder →</div></div><div class="card"><div class="card-actions"><button class="icon-btn" title="Rename" onclick="openEdit(5)">✎</button><button class="icon-btn" title="Delete" onclick="deleteFolder(5)">×</button></div><div class="card-folder">▰</div><div class="card-name">06 – As-Built Drawings</div><div class="card-meta">Basebuild, Post-Tension &amp; Fitout</div><div class="open">Open folder →</div></div><div class="card"><div class="card-actions"><button class="icon-btn" title="Rename" onclick="openEdit(6)">✎</button><button class="icon-btn" title="Delete" onclick="deleteFolder(6)">×</button></div><div class="card-folder">▰</div><div class="card-name">07 – FF&amp;E</div><div class="card-meta">FF&amp;E List</div><div class="open">Open folder →</div></div><div class="card"><div class="card-actions"><button class="icon-btn" title="Rename" onclick="openEdit(7)">✎</button><button class="icon-btn" title="Delete" onclick="deleteFolder(7)">×</button></div><div class="card-folder">▰</div><div class="card-name">08 – Assets</div><div class="card-meta">Key Register</div><div class="open">Open folder →</div></div><div class="card"><div class="card-actions"><button class="icon-btn" title="Rename" onclick="openEdit(8)">✎</button><button class="icon-btn" title="Delete" onclick="deleteFolder(8)">×</button></div><div class="card-folder">▰</div><div class="card-name">09 – Defects Liability Period (DLP)</div><div class="card-meta">fäm Interior only</div><div class="open">Open folder →</div></div><div class="card"><div class="card-actions"><button class="icon-btn" title="Rename" onclick="openEdit(9)">✎</button><button class="icon-btn" title="Delete" onclick="deleteFolder(9)">×</button></div><div class="card-folder">▰</div><div class="card-name">10 – Taking-Over Certificate (TOC)</div><div class="card-meta">fäm Interior to Client</div><div class="open">Open folder →</div></div><div class="card"><div class="card-actions"><button class="icon-btn" title="Rename" onclick="openEdit(10)">✎</button><button class="icon-btn" title="Delete" onclick="deleteFolder(10)">×</button></div><div class="card-folder">▰</div><div class="card-name">11 – Handover Certificate</div><div class="card-meta">fäm Interior to Client</div><div class="open">Open folder →</div></div></div></div></section>
   </main>
   <footer contenteditable="true" data-edit-key="footerText" oninput="dirty()">FÄM INTERIOR • VILLA 606 HANDOVER DOCUMENT CONTROL SYSTEM</footer>
 </div>
@@ -147,106 +198,353 @@ function snagFloors(){return [
   {name:'D) Roof Floor',children:['01 Microcement','02 Tiling and Grouting','03 Ceiling Finishes','04 MEP','05 Marble','06 Façade and Glazing'].map(n=>({name:n,children:[]}))},
   {name:'E) External',children:['01 MEP','02 Tiling & Grouting','03 Glass','04 Boundary Walls','05 Cladding','06 Luna Wood','07 Swimming Pool','08 Landscaping'].map(n=>({name:n,children:[]}))}
 ]}
-let data=clone(defaultData),path=[],editIndex=null;
+
+const CONFIG_FILE_NAME='_villa606_system_state.json';
+
+let configFileId=null;
+let path=[], editIndex=null, syncing=false, autoSaveTimer=null, searchTerm='';
+let lastSyncAt=null;
+
 function clone(x){return JSON.parse(JSON.stringify(x))}
-function node(){let n=data;path.forEach(i=>n=n.children[i]);return n}
-function init(){
-  try{
-    const s=localStorage.getItem(STORAGE);
-    if(s){
-      const p=JSON.parse(s);
-      data=p.data||data;
-      document.getElementById('projectName').value=p.projectName||'Villa 606';
-      document.getElementById('clientName').value=p.clientName||'Client / Consultant';
-      document.getElementById('dateField').value=p.date||'';
-      applyTextEdits(p.textEdits||{});
-      document.getElementById('saveStatus').textContent='Saved version loaded';
-      document.getElementById('saveStatus').className='saved'
+function normalizeName(s){return String(s||'').trim().replace(/\s+/g,' ').toLowerCase()}
+function markMasterTree(n){
+  n.master=true;
+  (n.children||[]).forEach(markMasterTree);
+  return n
+}
+markMasterTree(defaultData);
+
+function mergePersisted(master,persisted){
+  const out=clone(master);
+  const src=persisted||{};
+  if(src.completed===true)out.completed=true;
+  if(src.driveId)out.driveId=src.driveId;
+  if(Array.isArray(src.files))out.files=src.files;
+  const masterChildren=out.children||[];
+  const persistedChildren=src.children||[];
+  masterChildren.forEach(mc=>{
+    const pc=persistedChildren.find(x=>normalizeName(x.name)===normalizeName(mc.name));
+    if(pc){
+      const merged=mergePersisted(mc,pc);
+      Object.assign(mc,merged)
     }
-  }catch(e){console.warn(e)}
-  updateDriveStatus();
-  render()
+  });
+  persistedChildren.filter(pc=>!masterChildren.some(mc=>normalizeName(mc.name)===normalizeName(pc.name))).forEach(pc=>{
+    const custom=clone(pc); custom.master=false; custom.custom=true;
+    masterChildren.push(custom)
+  });
+  out.children=masterChildren;
+  return out
+}
+let data=mergePersisted(defaultData,null);
+
+function node(){
+  let n=data;
+  path.forEach(i=>n=n.children[i]);
+  return n
+}
+function val(id){return document.getElementById(id).value}
+function esc(s){return String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
+function attr(s){return esc(s)}
+function formatBytes(bytes){
+  if(!bytes)return 'PDF';
+  const units=['B','KB','MB','GB'];let n=Number(bytes),i=0;
+  while(n>=1024&&i<units.length-1){n/=1024;i++}
+  return (i?(n>=10?n.toFixed(1):n.toFixed(2)):n)+' '+units[i]
+}
+function formatDate(iso){
+  if(!iso)return 'Date unavailable';
+  const d=new Date(iso);
+  return isNaN(d)?'Date unavailable':d.toLocaleString([], {year:'numeric',month:'short',day:'2-digit',hour:'2-digit',minute:'2-digit'})
+}
+function setSaveStatus(text,ok=true){
+  const s=document.getElementById('saveStatus');
+  s.textContent=text;
+  s.className=ok?'saved':''
+}
+function getTextEdits(){
+  const out={};
+  document.querySelectorAll('[data-edit-key]').forEach(el=>out[el.dataset.editKey]=el.innerText.trim());
+  return out
+}
+function applyTextEdits(edits){
+  document.querySelectorAll('[data-edit-key]').forEach(el=>{
+    if(Object.prototype.hasOwnProperty.call(edits||{},el.dataset.editKey))el.innerText=edits[el.dataset.editKey]
+  })
+}
+function currentState(){
+  return {
+    version:3,
+    updatedAt:new Date().toISOString(),
+    lastSyncAt,
+    data,
+    projectName:val('projectName'),
+    clientName:val('clientName'),
+    date:val('dateField'),
+    textEdits:getTextEdits()
+  }
+}
+function applyState(p){
+  if(!p||typeof p!=='object')return;
+  data=mergePersisted(defaultData,p.data||null);
+  lastSyncAt=p.lastSyncAt||null;
+  document.getElementById('projectName').value=p.projectName||'Villa 606';
+  document.getElementById('clientName').value=p.clientName||'Client / Consultant';
+  document.getElementById('dateField').value=p.date||'';
+  applyTextEdits(p.textEdits||{})
+}
+
+function directDocCount(n){return (n.files||[]).length}
+function documentCountDeep(n){
+  return directDocCount(n)+(n.children||[]).reduce((sum,c)=>sum+documentCountDeep(c),0)
+}
+function leafNodes(n,arr=[]){
+  const kids=n.children||[];
+  if(!kids.length){arr.push(n);return arr}
+  kids.forEach(c=>leafNodes(c,arr));
+  return arr
+}
+function requiredLeaves(){
+  return leafNodes(data,[]).filter(n=>n.master!==false)
+}
+function statusFor(n){
+  if(n.completed)return {label:'Complete',cls:'status-complete'};
+  if(documentCountDeep(n)>0)return {label:'Documents Uploaded',cls:'status-populated'};
+  return {label:'Pending',cls:'status-pending'}
+}
+function folderMetaText(f){
+  const docs=documentCountDeep(f);
+  const subs=(f.children||[]).length;
+  return `${docs} ${docs===1?'document':'documents'} • ${subs} ${subs===1?'subfolder':'subfolders'}`
+}
+function updateMetrics(){
+  const docs=documentCountDeep(data);
+  const leaves=requiredLeaves();
+  const populated=leaves.filter(n=>documentCountDeep(n)>0).length;
+  const outstanding=Math.max(0,leaves.length-populated);
+  const coverage=leaves.length?Math.round(populated/leaves.length*100):0;
+  document.getElementById('metricDocs').textContent=docs;
+  document.getElementById('metricPopulated').textContent=populated;
+  document.getElementById('metricPopulatedSub').textContent=`of ${leaves.length} required folders`;
+  document.getElementById('metricOutstanding').textContent=outstanding;
+  document.getElementById('metricCoverage').textContent=coverage+'%';
+  document.getElementById('coverageFill').style.width=coverage+'%'
+}
+function updateCurrentCompleteButton(){
+  const btn=document.getElementById('completeBtn');
+  if(!path.length){btn.style.display='none';return}
+  btn.style.display='';
+  btn.textContent=node().completed?'✓ Complete — Reopen':'Mark Complete';
+}
+async function toggleCurrentComplete(){
+  if(!path.length)return;
+  node().completed=!node().completed;
+  render();
+  await saveData()
+}
+
+function buildBreadcrumb(){
+  let crumbs=['Handover Documents'],cur=data;
+  path.forEach(i=>{cur=cur.children[i];crumbs.push(cur.name)});
+  return crumbs.join('  /  ')
 }
 function render(){
   const n=node(),grid=document.getElementById('grid');
-  document.getElementById('folderTitle').textContent=path.length?n.name:'Main Folders';
-  let crumbs=['Handover Documents'],cur=data;
-  path.forEach(i=>{cur=cur.children[i];crumbs.push(cur.name)});
-  document.getElementById('breadcrumb').textContent=crumbs.join('  /  ');
+  document.getElementById('folderTitle').textContent=path.length?n.name:`Main Folders • ${documentCountDeep(data)} ${documentCountDeep(data)===1?'document':'documents'}`;
+  document.getElementById('breadcrumb').textContent=buildBreadcrumb();
   grid.innerHTML='';
+
   (n.children||[]).forEach((f,i)=>{
+    const st=statusFor(f);
     const c=document.createElement('div');
     c.className='card';
+    c.dataset.search=(f.name+' '+folderMetaText(f)+' '+st.label).toLowerCase();
     c.onclick=e=>{if(!e.target.closest('button'))openFolder(i)};
-    c.innerHTML=`<div class="card-actions"><button class="icon-btn" title="Rename" onclick="openEdit(${i})">✎</button><button class="icon-btn" title="Delete" onclick="deleteFolder(${i})">×</button></div><div class="card-folder">▰</div><div class="card-name">${esc(f.name)}</div><div class="card-meta">${esc(f.note||((f.children||[]).length+' subfolder(s)'))}</div><div class="open">Open folder →</div>`;
+    const actions=f.master===false
+      ? `<div class="card-actions"><button class="icon-btn" title="Rename custom folder" onclick="openEdit(${i})">✎</button><button class="icon-btn" title="Delete custom folder" onclick="deleteFolder(${i})">×</button></div>`
+      : '';
+    const lock=f.master!==false?'<span class="locked">Master folder</span>':'';
+    c.innerHTML=`${actions}<div class="card-folder">▰</div><div class="card-name">${esc(f.name)} ${lock}</div><div class="card-meta">${esc(folderMetaText(f))}</div><span class="status-pill ${st.cls}">${st.label}</span><div class="open">Open folder →</div>`;
     grid.appendChild(c)
   });
+
   (n.files||[]).forEach((f,i)=>{
     const c=document.createElement('div');
     c.className='card file-card';
-    c.innerHTML=`<div class="file-icon">📄</div><div class="card-name">${esc(f.name)}</div><div class="card-meta">${esc(f.sizeText||'PDF')} • Google Drive</div><div class="file-actions"><button onclick="viewDriveFile(${i})">View PDF</button><button onclick="downloadDriveFile(${i})">Download</button><button onclick="removeFileRecord(${i})">Remove from Dashboard</button></div>`;
+    c.dataset.search=(f.name+' '+(f.modifiedTime||'')).toLowerCase();
+    c.innerHTML=`<div class="file-icon">📄</div><div class="card-name">${esc(f.name)}</div><div class="card-meta">${esc(f.sizeText||'PDF')} • Google Drive</div><div class="file-date">Modified ${esc(formatDate(f.modifiedTime))}</div><div class="file-actions"><button onclick="viewDriveFile(${i})">View PDF</button><button onclick="downloadDriveFile(${i})">Download</button><button onclick="deleteDriveFile(${i})">Delete from Drive</button></div>`;
     grid.appendChild(c)
   });
+
   if(!(n.children||[]).length && !(n.files||[]).length){
-    grid.innerHTML='<div class="empty">This folder is ready for project documents.<br><br>Use <b>＋ Upload PDF</b> to upload an actual PDF file to Google Drive, or <b>＋ Add Folder</b> to extend the structure.</div>'
+    grid.innerHTML='<div class="empty">This folder is ready for project documents.<br><br>Use <b>＋ Upload PDF</b> to upload an actual PDF to Google Drive.</div>'
   }
-  renderTree()
+  renderTree();
+  updateMetrics();
+  updateCurrentCompleteButton();
+  if(searchTerm)applySearch(searchTerm,false);
 }
-function renderTree(){const t=document.getElementById('tree');t.innerHTML=`<div class="tree-item ${path.length?'':'active'}" onclick="goRoot()"><span class="folder-icon">▰</span>Handover Documents</div>`;data.children.forEach((f,i)=>{const x=document.createElement('div');x.className='tree-item '+(path[0]===i?'active':'');x.innerHTML=`<span class="folder-icon">▰</span><span>${esc(f.name)}</span>`;x.onclick=()=>{path=[i];render()};t.appendChild(x)})}
-function openFolder(i){path.push(i);render()}function goRoot(){path=[];render()}
-function openAdd(){editIndex=null;document.getElementById('modalTitle').textContent='Add Folder';document.getElementById('folderInput').value='';document.getElementById('modal').classList.add('show');setTimeout(()=>document.getElementById('folderInput').focus(),20)}
-function openEdit(i){editIndex=i;document.getElementById('modalTitle').textContent='Rename Folder';document.getElementById('folderInput').value=node().children[i].name;document.getElementById('modal').classList.add('show')}
+function renderTree(){
+  const t=document.getElementById('tree');
+  t.innerHTML=`<div class="tree-item ${path.length?'':'active'}" onclick="goRoot()"><span class="folder-icon">▰</span>Handover Documents</div>`;
+  data.children.forEach((f,i)=>{
+    const x=document.createElement('div');
+    x.className='tree-item '+(path[0]===i?'active':'');
+    x.innerHTML=`<span class="folder-icon">▰</span><span>${esc(f.name)} <small>(${documentCountDeep(f)})</small></span>`;
+    x.onclick=()=>{path=[i];render()};
+    t.appendChild(x)
+  })
+}
+function openFolder(i){path.push(i);render()}
+function goRoot(){path=[];render()}
+function clearSearch(){
+  searchTerm='';
+  const inp=document.getElementById('searchInput'); if(inp)inp.value='';
+  render()
+}
+function flattenSearch(n,crumbs=['Handover Documents'],out=[]){
+  (n.children||[]).forEach((c,i)=>{
+    const cc=crumbs.concat(c.name);
+    out.push({type:'folder',name:c.name,path:cc.join(' / '),node:c});
+    flattenSearch(c,cc,out)
+  });
+  (n.files||[]).forEach(f=>out.push({type:'file',name:f.name,path:crumbs.join(' / '),file:f}));
+  return out
+}
+function applySearch(q,rerender=true){
+  searchTerm=String(q||'').trim().toLowerCase();
+  const summary=document.getElementById('searchSummary');
+  if(!searchTerm){
+    document.querySelectorAll('#grid .card').forEach(c=>c.style.display='');
+    summary.textContent=lastSyncAt?'Last full sync: '+formatDate(lastSyncAt):'Connect Google Drive to synchronize the full project.';
+    return
+  }
+  const all=flattenSearch(data);
+  const hits=all.filter(x=>(x.name+' '+x.path).toLowerCase().includes(searchTerm));
+  summary.innerHTML=hits.length
+    ? `${hits.length} match${hits.length===1?'':'es'} across the synchronized Villa 606 structure. ${hits.slice(0,5).map(h=>`<b>${esc(h.name)}</b> — ${esc(h.path)}`).join(' &nbsp; • &nbsp; ')}`
+    : 'No synchronized folder or PDF matches this search.';
+  document.querySelectorAll('#grid .card').forEach(c=>{
+    c.style.display=(c.dataset.search||'').includes(searchTerm)?'':'none'
+  })
+}
+
+function openAdd(){
+  editIndex=null;
+  document.getElementById('modalTitle').textContent='Add Custom Folder';
+  document.getElementById('folderInput').value='';
+  document.getElementById('modal').classList.add('show');
+  setTimeout(()=>document.getElementById('folderInput').focus(),20)
+}
+function openEdit(i){
+  const f=node().children[i];
+  if(f.master!==false){alert('The approved Villa 606 master folder structure is locked.');return}
+  editIndex=i;
+  document.getElementById('modalTitle').textContent='Rename Custom Folder';
+  document.getElementById('folderInput').value=f.name;
+  document.getElementById('modal').classList.add('show')
+}
 function closeModal(){document.getElementById('modal').classList.remove('show')}
-function confirmModal(){const v=document.getElementById('folderInput').value.trim();if(!v)return;if(editIndex===null){node().children=node().children||[];node().children.push({name:v,children:[]})}else node().children[editIndex].name=v;closeModal();dirty();render()}
-function deleteFolder(i){if(confirm('Delete “'+node().children[i].name+'” and all its subfolders?')){node().children.splice(i,1);dirty();render()}}
-function getTextEdits(){const out={};document.querySelectorAll('[data-edit-key]').forEach(el=>out[el.dataset.editKey]=el.innerText.trim());return out}
-function applyTextEdits(edits){document.querySelectorAll('[data-edit-key]').forEach(el=>{if(Object.prototype.hasOwnProperty.call(edits,el.dataset.editKey))el.innerText=edits[el.dataset.editKey]})}
-function currentState(){return {data,projectName:val('projectName'),clientName:val('clientName'),date:val('dateField'),textEdits:getTextEdits()}}
-function saveData(){localStorage.setItem(STORAGE,JSON.stringify(currentState()));const s=document.getElementById('saveStatus');s.textContent='Saved in this browser • '+new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});s.className='saved'}
-function dirty(){const s=document.getElementById('saveStatus');s.textContent='Unsaved changes';s.className=''}
-function val(id){return document.getElementById(id).value}
+async function confirmModal(){
+  const v=document.getElementById('folderInput').value.trim();
+  if(!v)return;
+  if(!driveToken){alert('Connect Google Drive before changing the shared folder structure.');return}
+  try{
+    const parentId=await resolveCurrentDriveFolder();
+    if(editIndex===null){
+      if((node().children||[]).some(x=>normalizeName(x.name)===normalizeName(v))){
+        alert('A folder with this name already exists here.');
+        return
+      }
+      const made=await createDriveFolder(parentId,v);
+      node().children.push({name:v,children:[],files:[],driveId:made.id,custom:true,master:false})
+    }else{
+      const f=node().children[editIndex];
+      if(f.master!==false)throw new Error('Master folders cannot be renamed.');
+      const folderId=f.driveId||await getOrCreateFolder(parentId,f.name);
+      await driveJson('https://www.googleapis.com/drive/v3/files/'+encodeURIComponent(folderId)+'?fields=id,name',{
+        method:'PATCH',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:v})
+      });
+      f.name=v;f.driveId=folderId
+    }
+    closeModal();render();await saveData();await syncAllFromDrive()
+  }catch(e){alert('Folder update failed. '+friendlyError(e))}
+}
+async function deleteFolder(i){
+  const f=node().children[i];
+  if(f.master!==false){alert('The approved Villa 606 master folder structure is locked and cannot be deleted.');return}
+  if(!confirm(`Delete custom folder “${f.name}” from Google Drive?\n\nThe folder and everything inside it will be moved to Google Drive Trash.`))return;
+  try{
+    if(f.driveId)await trashDriveItem(f.driveId);
+    node().children.splice(i,1);
+    render();await saveData();await syncAllFromDrive()
+  }catch(e){alert('Delete failed. '+friendlyError(e))}
+}
+
+function dirty(){
+  setSaveStatus(driveToken?'Unsaved cloud changes':'Unsaved local changes',false);
+  clearTimeout(autoSaveTimer);
+  autoSaveTimer=setTimeout(()=>saveData(),1200)
+}
+async function saveData(){
+  const state=currentState();
+  localStorage.setItem(STORAGE,JSON.stringify(state));
+  if(!driveToken){setSaveStatus('Saved locally • connect Drive to synchronize');return}
+  try{
+    setSaveStatus('Saving shared settings to Google Drive…',false);
+    await saveCloudState(state);
+    setSaveStatus('Saved to Google Drive • '+new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'}))
+  }catch(e){
+    console.error(e);
+    setSaveStatus('Cloud save failed • local copy retained',false)
+  }
+}
 function exportPDF(){saveData();window.print()}
 function downloadHTML(){
   saveData();
-  let html='<!DOCTYPE html>\n'+document.documentElement.outerHTML;
-  const stateJson=JSON.stringify(currentState()).replace(/</g,'\\u003c');
-  html=html.replace(/const EMBEDDED_STATE=.*?;/,'const EMBEDDED_STATE='+stateJson+';');
+  const html='<!DOCTYPE html>\n'+document.documentElement.outerHTML;
   const blob=new Blob([html],{type:'text/html'}),a=document.createElement('a');
-  a.href=URL.createObjectURL(blob);
-  a.download='Villa_606_Handover_Document_System.html';
-  a.click();
+  a.href=URL.createObjectURL(blob);a.download='Villa_606_Handover_Document_System.html';a.click();
   setTimeout(()=>URL.revokeObjectURL(a.href),1000)
 }
 
 function updateDriveStatus(msg){
   const el=document.getElementById('driveStatus');if(!el)return;
   if(msg){el.textContent=msg;return}
-  if(GOOGLE_OAUTH_CLIENT_ID.includes('PASTE_')){
-    el.textContent='Google OAuth Client ID pending';
-    el.className='drive-status';
-  }else if(driveToken){
-    el.textContent='Connected to Google Drive';
-    el.className='drive-status connected';
+  if(driveToken){
+    el.textContent='Connected to Google Drive • shared live data';
+    el.className='drive-status connected'
   }else{
     el.textContent='Google Drive ready • click Connect Google Drive';
-    el.className='drive-status';
+    el.className='drive-status'
   }
 }
+function friendlyError(e){
+  const s=String(e&&e.message||e||'Unknown error');
+  if(s.includes('401'))return 'Google session expired. Reconnect Google Drive and try again.';
+  if(s.includes('403'))return 'This Google account does not have permission for this Drive item.';
+  return s.length>280?s.slice(0,280)+'…':s
+}
 function connectDrive(){
-  if(GOOGLE_OAUTH_CLIENT_ID.includes('PASTE_')){
-    alert('Google OAuth Client ID still needs to be added to this HTML.');
-    return
-  }
   if(!(window.google&&google.accounts&&google.accounts.oauth2)){
-    alert('Google sign-in is still loading. Wait a moment and try again.');
-    return
+    alert('Google sign-in is still loading. Wait a moment and try again.');return
   }
   tokenClient=google.accounts.oauth2.initTokenClient({
     client_id:GOOGLE_OAUTH_CLIENT_ID,
     scope:'https://www.googleapis.com/auth/drive',
-    callback:(resp)=>{
+    callback:async(resp)=>{
       if(resp.error){alert('Google Drive sign-in failed: '+resp.error);return}
-      driveToken=resp.access_token;updateDriveStatus()
+      driveToken=resp.access_token;
+      updateDriveStatus('Connected • loading shared Villa 606 data…');
+      try{
+        await loadCloudState();
+        await syncAllFromDrive();
+        updateDriveStatus();
+        setSaveStatus('Synchronized with Google Drive')
+      }catch(e){
+        console.error(e);updateDriveStatus();
+        alert('Connected, but synchronization failed. '+friendlyError(e))
+      }
     }
   });
   tokenClient.requestAccessToken({prompt:'consent'})
@@ -256,116 +554,268 @@ function ensureDriveConnected(){
   return true
 }
 function choosePdf(){
-  if(!ensureDriveConnected())return;
+  if(!driveToken){
+    alert('Connect Google Drive first, then click Upload PDF again.');
+    connectDrive();return
+  }
   document.getElementById('pdfInput').click()
 }
+
 async function driveJson(url,opts={}){
   opts.headers=Object.assign({},opts.headers||{},{Authorization:'Bearer '+driveToken});
   const r=await fetch(url,opts);
-  if(r.status===401){driveToken=null;updateDriveStatus();throw new Error('Google session expired. Connect Google Drive again.')}
-  if(!r.ok){throw new Error(await r.text()||('Google Drive error '+r.status))}
+  if(r.status===401){driveToken=null;updateDriveStatus();throw new Error('401 Google session expired.')}
+  if(!r.ok)throw new Error(`${r.status} ${await r.text()||'Google Drive request failed'}`);
+  if(r.status===204)return {};
   return r.json()
 }
-async function getOrCreateFolder(parentId,name){
+async function listDriveChildren(parentId){
+  let pageToken='',all=[];
+  do{
+    const q=`'${parentId}' in parents and trashed=false`;
+    const params=new URLSearchParams({
+      q,spaces:'drive',fields:'nextPageToken,files(id,name,mimeType,size,webViewLink,modifiedTime)',pageSize:'1000'
+    });
+    if(pageToken)params.set('pageToken',pageToken);
+    const r=await driveJson('https://www.googleapis.com/drive/v3/files?'+params.toString());
+    all=all.concat(r.files||[]);pageToken=r.nextPageToken||''
+  }while(pageToken);
+  return all
+}
+async function findDriveFolder(parentId,name){
   const safeName=name.replace(/'/g,"\\'");
   const q=`name='${safeName}' and '${parentId}' in parents and mimeType='application/vnd.google-apps.folder' and trashed=false`;
-  const found=await driveJson('https://www.googleapis.com/drive/v3/files?q='+encodeURIComponent(q)+'&fields=files(id,name)&spaces=drive');
-  if(found.files&&found.files.length)return found.files[0].id;
-  const made=await driveJson('https://www.googleapis.com/drive/v3/files?fields=id,name',{
-    method:'POST',
-    headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({name:name,mimeType:'application/vnd.google-apps.folder',parents:[parentId]})
-  });
-  return made.id
+  const r=await driveJson('https://www.googleapis.com/drive/v3/files?q='+encodeURIComponent(q)+'&fields=files(id,name)&spaces=drive&pageSize=10');
+  return r.files&&r.files[0]||null
+}
+async function createDriveFolder(parentId,name){
+  return driveJson('https://www.googleapis.com/drive/v3/files?fields=id,name',{
+    method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({name,mimeType:'application/vnd.google-apps.folder',parents:[parentId]})
+  })
+}
+async function getOrCreateFolder(parentId,name){
+  const found=await findDriveFolder(parentId,name);
+  if(found)return found.id;
+  return (await createDriveFolder(parentId,name)).id
 }
 async function resolveCurrentDriveFolder(){
   let parent=DRIVE_ROOT_FOLDER_ID,cur=data;
+  cur.driveId=DRIVE_ROOT_FOLDER_ID;
   for(const idx of path){
     cur=cur.children[idx];
-    parent=await getOrCreateFolder(parent,cur.name)
+    if(!cur.driveId)cur.driveId=await getOrCreateFolder(parent,cur.name);
+    parent=cur.driveId
   }
   return parent
 }
-function formatBytes(bytes){
-  if(!bytes)return 'PDF';
-  const units=['B','KB','MB','GB'];let n=Number(bytes),i=0;
-  while(n>=1024&&i<units.length-1){n/=1024;i++}
-  return (i?(n>=10?n.toFixed(1):n.toFixed(2)):n)+' '+units[i]
+async function trashDriveItem(id){
+  return driveJson('https://www.googleapis.com/drive/v3/files/'+encodeURIComponent(id),{
+    method:'PATCH',headers:{'Content-Type':'application/json'},body:JSON.stringify({trashed:true})
+  })
+}
+
+function mergeDriveFolderIntoNode(target,driveFolder){
+  target.driveId=driveFolder.id;
+  target.name=driveFolder.name;
+}
+async function syncNodeRecursive(target,parentId,isRoot=false){
+  target.driveId=isRoot?DRIVE_ROOT_FOLDER_ID:(target.driveId||parentId);
+  const actualParent=isRoot?DRIVE_ROOT_FOLDER_ID:target.driveId;
+  const items=await listDriveChildren(actualParent);
+  const folders=items.filter(x=>x.mimeType==='application/vnd.google-apps.folder');
+  const pdfs=items.filter(x=>x.mimeType==='application/pdf');
+
+  target.files=pdfs.map(f=>({
+    id:f.id,name:f.name,size:f.size||0,sizeText:formatBytes(f.size||0),
+    webViewLink:f.webViewLink||('https://drive.google.com/file/d/'+f.id+'/view'),
+    modifiedTime:f.modifiedTime||''
+  }));
+
+  target.children=target.children||[];
+  for(const df of folders){
+    let child=target.children.find(x=>x.driveId===df.id)||
+              target.children.find(x=>normalizeName(x.name)===normalizeName(df.name));
+    if(!child){
+      child={name:df.name,children:[],files:[],driveId:df.id,custom:true,master:false};
+      target.children.push(child)
+    }else{
+      child.driveId=df.id
+    }
+  }
+
+  for(const child of target.children){
+    if(!child.driveId){
+      const found=folders.find(df=>normalizeName(df.name)===normalizeName(child.name));
+      if(found)child.driveId=found.id
+    }
+    if(child.driveId)await syncNodeRecursive(child,child.driveId,false)
+  }
+}
+async function syncAllFromDrive(){
+  if(!driveToken){alert('Connect Google Drive first.');return}
+  if(syncing)return;
+  syncing=true;
+  const panel=document.querySelector('.panel');
+  try{
+    panel.classList.add('uploading');
+    updateDriveStatus('Synchronizing all Villa 606 folders and document counts…');
+    await syncNodeRecursive(data,DRIVE_ROOT_FOLDER_ID,true);
+    lastSyncAt=new Date().toISOString();
+    localStorage.setItem(STORAGE,JSON.stringify(currentState()));
+    render();
+    await saveCloudState(currentState());
+    document.getElementById('searchSummary').textContent='Last full sync: '+formatDate(lastSyncAt);
+    updateDriveStatus('Full synchronization complete ✓');
+    setTimeout(()=>updateDriveStatus(),1800)
+  }catch(e){
+    console.error(e);alert('Full synchronization failed. '+friendlyError(e));updateDriveStatus()
+  }finally{
+    panel.classList.remove('uploading');syncing=false
+  }
+}
+async function syncCurrentFromDrive(){return syncAllFromDrive()}
+
+async function findConfigFile(){
+  const safeName=CONFIG_FILE_NAME.replace(/'/g,"\\'");
+  const q=`name='${safeName}' and '${DRIVE_ROOT_FOLDER_ID}' in parents and trashed=false`;
+  const r=await driveJson('https://www.googleapis.com/drive/v3/files?q='+encodeURIComponent(q)+'&fields=files(id,name)&spaces=drive&pageSize=10');
+  return r.files&&r.files[0]||null
+}
+async function loadCloudState(){
+  const found=await findConfigFile();
+  if(!found){await saveCloudState(currentState());return}
+  configFileId=found.id;
+  const r=await fetch('https://www.googleapis.com/drive/v3/files/'+encodeURIComponent(configFileId)+'?alt=media',{headers:{Authorization:'Bearer '+driveToken}});
+  if(!r.ok)throw new Error(`${r.status} ${await r.text()}`);
+  const cloud=await r.json();
+  applyState(cloud);
+  localStorage.setItem(STORAGE,JSON.stringify(currentState()));
+  render()
+}
+async function saveCloudState(state){
+  const payload=JSON.stringify(state,null,2);
+  if(!configFileId){
+    const found=await findConfigFile();
+    if(found)configFileId=found.id
+  }
+  if(configFileId){
+    const r=await fetch('https://www.googleapis.com/upload/drive/v3/files/'+encodeURIComponent(configFileId)+'?uploadType=media',{
+      method:'PATCH',headers:{Authorization:'Bearer '+driveToken,'Content-Type':'application/json'},body:payload
+    });
+    if(!r.ok)throw new Error(`${r.status} ${await r.text()}`);
+    return
+  }
+  const boundary='-------famConfigBoundary'+Date.now();
+  const meta={name:CONFIG_FILE_NAME,mimeType:'application/json',parents:[DRIVE_ROOT_FOLDER_ID]};
+  const body=new Blob([
+    '--'+boundary+'\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n',JSON.stringify(meta),
+    '\r\n--'+boundary+'\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n',payload,
+    '\r\n--'+boundary+'--'
+  ],{type:'multipart/related; boundary='+boundary});
+  const r=await fetch('https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&fields=id,name',{
+    method:'POST',headers:{Authorization:'Bearer '+driveToken,'Content-Type':'multipart/related; boundary='+boundary},body
+  });
+  if(!r.ok)throw new Error(`${r.status} ${await r.text()}`);
+  configFileId=(await r.json()).id
+}
+
+async function findSameNamePdf(parentId,name){
+  const safeName=name.replace(/'/g,"\\'");
+  const q=`name='${safeName}' and '${parentId}' in parents and mimeType='application/pdf' and trashed=false`;
+  const r=await driveJson('https://www.googleapis.com/drive/v3/files?q='+encodeURIComponent(q)+'&fields=files(id,name,size,modifiedTime)&spaces=drive&pageSize=10');
+  return r.files&&r.files[0]||null
+}
+async function multipartUpload(file,parentId,existingId=null){
+  const boundary='-------famBoundary'+Date.now();
+  const meta=existingId?{name:file.name,mimeType:'application/pdf'}:{name:file.name,mimeType:'application/pdf',parents:[parentId]};
+  const body=new Blob([
+    '--'+boundary+'\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n',JSON.stringify(meta),
+    '\r\n--'+boundary+'\r\nContent-Type: application/pdf\r\n\r\n',file,
+    '\r\n--'+boundary+'--'
+  ],{type:'multipart/related; boundary='+boundary});
+  const url=existingId
+    ? 'https://www.googleapis.com/upload/drive/v3/files/'+encodeURIComponent(existingId)+'?uploadType=multipart&fields=id,name,size,webViewLink,modifiedTime'
+    : 'https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&fields=id,name,size,webViewLink,modifiedTime';
+  const r=await fetch(url,{
+    method:existingId?'PATCH':'POST',
+    headers:{Authorization:'Bearer '+driveToken,'Content-Type':'multipart/related; boundary='+boundary},
+    body
+  });
+  if(r.status===401){driveToken=null;updateDriveStatus();throw new Error('401 Google session expired.')}
+  if(!r.ok)throw new Error(`${r.status} ${await r.text()}`);
+  return r.json()
 }
 async function uploadSelectedPdf(ev){
   const file=ev.target.files&&ev.target.files[0];ev.target.value='';
   if(!file)return;
-  if(file.type!=='application/pdf'&&!file.name.toLowerCase().endsWith('.pdf')){
-    alert('Please select a PDF file.');
-    return
-  }
-  if(!ensureDriveConnected())return;
+  if(file.type!=='application/pdf'&&!file.name.toLowerCase().endsWith('.pdf')){alert('Please select a PDF file.');return}
+  if(!driveToken){alert('Connect Google Drive first.');connectDrive();return}
+  const panel=document.querySelector('.panel');
   try{
-    updateDriveStatus('Uploading '+file.name+'…');
-    document.querySelector('.panel').classList.add('uploading');
+    panel.classList.add('uploading');
+    updateDriveStatus('Checking '+file.name+'…');
     const parentId=await resolveCurrentDriveFolder();
-    const boundary='-------famBoundary'+Date.now();
-    const meta={name:file.name,mimeType:'application/pdf',parents:[parentId]};
-    const body=new Blob([
-      '--'+boundary+'\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n',
-      JSON.stringify(meta),
-      '\r\n--'+boundary+'\r\nContent-Type: application/pdf\r\n\r\n',
-      file,
-      '\r\n--'+boundary+'--'
-    ],{type:'multipart/related; boundary='+boundary});
-    const r=await fetch('https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&fields=id,name,size,webViewLink',{
-      method:'POST',
-      headers:{Authorization:'Bearer '+driveToken,'Content-Type':'multipart/related; boundary='+boundary},
-      body:body
-    });
-    if(!r.ok)throw new Error(await r.text());
-    const info=await r.json();
-    node().files=node().files||[];
-    node().files.push({id:info.id,name:info.name||file.name,size:info.size||file.size,sizeText:formatBytes(info.size||file.size),webViewLink:info.webViewLink||''});
-    saveData();render();updateDriveStatus('Document uploaded successfully ✓');
-    setTimeout(()=>updateDriveStatus(),2200)
+    const duplicate=await findSameNamePdf(parentId,file.name);
+    if(duplicate){
+      const replace=confirm(`A PDF named “${file.name}” already exists in this folder.\n\nOK = Replace the existing Drive file\nCancel = Keep the existing file and stop`);
+      if(!replace){updateDriveStatus();return}
+      await multipartUpload(file,parentId,duplicate.id)
+    }else{
+      await multipartUpload(file,parentId)
+    }
+    await syncAllFromDrive();
+    setSaveStatus('Upload complete • live counts synchronized')
   }catch(e){
-    console.error(e);
-    alert('Upload failed. '+e.message);
-    updateDriveStatus()
-  }finally{
-    document.querySelector('.panel').classList.remove('uploading')
-  }
+    console.error(e);alert('Upload failed. '+friendlyError(e));updateDriveStatus()
+  }finally{panel.classList.remove('uploading')}
+}
+function viewDriveFile(i){
+  const f=(node().files||[])[i];
+  window.open(f.webViewLink||('https://drive.google.com/file/d/'+encodeURIComponent(f.id)+'/view'),'_blank','noopener')
 }
 async function fetchDriveBlob(id){
   if(!ensureDriveConnected())throw new Error('Connect Google Drive first.');
   const r=await fetch('https://www.googleapis.com/drive/v3/files/'+encodeURIComponent(id)+'?alt=media',{headers:{Authorization:'Bearer '+driveToken}});
-  if(r.status===401){driveToken=null;updateDriveStatus();throw new Error('Google session expired. Connect Google Drive again.')}
-  if(!r.ok)throw new Error(await r.text());
+  if(r.status===401){driveToken=null;updateDriveStatus();throw new Error('401 Google session expired.')}
+  if(!r.ok)throw new Error(`${r.status} ${await r.text()}`);
   return r.blob()
-}
-async function viewDriveFile(i){
-  try{
-    const f=(node().files||[])[i];
-    const blob=await fetchDriveBlob(f.id);
-    const url=URL.createObjectURL(blob);
-    const w=window.open(url,'_blank');
-    if(!w){URL.revokeObjectURL(url);alert('Your browser blocked the PDF window. Allow pop-ups and try again.')}
-    else setTimeout(()=>URL.revokeObjectURL(url),60000)
-  }catch(e){alert(e.message)}
 }
 async function downloadDriveFile(i){
   try{
-    const f=(node().files||[])[i];
-    const blob=await fetchDriveBlob(f.id);
+    const f=(node().files||[])[i],blob=await fetchDriveBlob(f.id);
     const url=URL.createObjectURL(blob),a=document.createElement('a');
     a.href=url;a.download=f.name||'document.pdf';a.click();
     setTimeout(()=>URL.revokeObjectURL(url),1500)
-  }catch(e){alert(e.message)}
+  }catch(e){alert(friendlyError(e))}
 }
-function removeFileRecord(i){
+async function deleteDriveFile(i){
   const f=(node().files||[])[i];
-  if(confirm('Remove “'+f.name+'” from this dashboard?\n\nThe actual PDF will remain in Google Drive.')){
-    node().files.splice(i,1);saveData();render()
-  }
+  const typed=prompt(`This will move the actual PDF to Google Drive Trash.\n\nTo delete “${f.name}”, type DELETE below.`);
+  if(typed!=='DELETE')return;
+  try{
+    await trashDriveItem(f.id);
+    await syncAllFromDrive();
+    setSaveStatus('PDF moved to Drive Trash • counts synchronized')
+  }catch(e){alert('Delete failed. '+friendlyError(e))}
 }
-function esc(s){return String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}function attr(s){return esc(s)}
-document.getElementById('folderInput').addEventListener('keydown',e=>{if(e.key==='Enter')confirmModal()});document.getElementById('modal').addEventListener('click',e=>{if(e.target.id==='modal')closeModal()});init();
+
+function init(){
+  try{
+    const s=localStorage.getItem(STORAGE);
+    if(s){
+      applyState(JSON.parse(s));
+      setSaveStatus('Local cache loaded • connect Drive for live synchronization')
+    }
+  }catch(e){console.warn(e)}
+  updateDriveStatus();
+  render();
+  document.getElementById('searchSummary').textContent=lastSyncAt?'Last full sync: '+formatDate(lastSyncAt):'Connect Google Drive to synchronize the full project.'
+}
+document.getElementById('folderInput').addEventListener('keydown',e=>{if(e.key==='Enter')confirmModal()});
+document.getElementById('modal').addEventListener('click',e=>{if(e.target.id==='modal')closeModal()});
+init();
+
 </script>
 
 
